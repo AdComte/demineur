@@ -5,11 +5,31 @@
  */
 package demineur.modele;
 
+import java.util.Observable;
+
 /**
  *
  * @author Vladimir
  */
-public class Case {
-        private boolean flag;
-        private int x,y;
+public class Case extends Observable {
+
+    private boolean flagged;
+    private int x, y;
+
+    public Case(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.flagged = false;
+    }
+
+    public boolean isFlagged() {
+        return flagged;
+    }
+
+    public void setFlagged(boolean flagged) {
+        this.flagged = flagged;
+        setChanged();
+        notifyObservers();
+    }
+
 }
