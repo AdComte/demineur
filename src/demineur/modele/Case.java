@@ -14,12 +14,30 @@ import java.util.Observable;
 public class Case extends Observable {
 
     private boolean flagged;
-    private int x, y;
+    private boolean revealed;
+    private final int x, y;
+
+    public boolean isRevealed() {
+        return revealed;
+    }
+
+    public void setRevealed(boolean revealed) {
+        this.revealed = revealed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
     public Case(int x, int y) {
         this.x = x;
         this.y = y;
         this.flagged = false;
+        this.revealed = false;
     }
 
     public boolean isFlagged() {
@@ -27,6 +45,7 @@ public class Case extends Observable {
     }
 
     public void setFlagged(boolean flagged) {
+        System.out.println("Entree dans setFlag");
         this.flagged = flagged;
         setChanged();
         notifyObservers();
