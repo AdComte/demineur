@@ -62,7 +62,7 @@ public class FenetrePrincipale extends JFrame {
         int y = jeu.getY();
         this.setLayout(new BorderLayout());
         this.menu_bar = new JMenuBar();
-        menu_bar.add(new JMenu("Menu"));     // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES LABEL AVANT DE L'ADD
+        menu_bar.add(new JMenu("Menu"));     // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
         
         this.corps = new JPanel();
         this.grille = new JPanel(new GridLayout(x, y));
@@ -71,7 +71,6 @@ public class FenetrePrincipale extends JFrame {
             for (int j = 0; j < y; j++) {
                 CaseVue cv = new CaseVue(i, j);
                 cv.addMouseListener(new CaseListener(this.jeu, this));
-//                cv.getBouton().addActionListener(new CaseListener(this.jeu, this));
                 this.grille.add(cv);
             }
         }

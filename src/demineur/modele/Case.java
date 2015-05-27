@@ -17,11 +17,11 @@ public class Case extends Observable {
     private boolean revealed;
     private final int x, y;
 
-    public boolean isRevealed() {
+    private boolean isRevealed() {
         return revealed;
     }
 
-    public void setRevealed(boolean revealed) {
+    private void setRevealed(boolean revealed) {
         this.revealed = revealed;
     }
 
@@ -44,11 +44,31 @@ public class Case extends Observable {
         return flagged;
     }
 
-    public void setFlagged(boolean flagged) {
-        System.out.println("Entree dans setFlag");
+    private void setFlagged(boolean flagged) {
         this.flagged = flagged;
+    }
+    
+    public void estClique(boolean flag)
+    {
+        if (flag)
+        {
+            if (!this.isRevealed())
+            {
+                this.setFlagged(!this.isFlagged());
+                //Mis à jour d'un compteur de bombe restante à -1 / +1 si on en rajoute un un jour
+            }
+        }
+        else
+        {
+            if(!this.isFlagged())
+            {
+                //TODO : Logique du clic gauche et de la révélation des cases adjacentes ou non / bombe fin de partie / valeur de la case
+                //Ne pas oublier de décompter le nombre de cases restantes à reveler
+            }
+        }
         setChanged();
         notifyObservers();
     }
-
+    
+    //Ajouter une fonction logique d'initialisation qui parcourt les voisins et qui compte les bombes voisines, seulement si la case n'est pas une bombe elle même
 }

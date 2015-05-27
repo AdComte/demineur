@@ -46,9 +46,11 @@ public class CaseListener implements MouseListener {
         CaseVue b = (CaseVue)e.getSource();
         if(e.getButton() == MouseEvent.BUTTON3)
         {
-            System.out.println("flag de la case ["+b.getCase().getX()+","+b.getCase().getY()+"]"+" = "+b.getCase().isFlagged());
-            b.getCase().setFlagged(!b.getCase().isFlagged());
-            System.out.println("flag = "+b.getCase().isFlagged());
+            b.getCase().estClique(true);
+        }
+        else if(e.getButton() == MouseEvent.BUTTON1)
+        {
+            b.getCase().estClique(false);
         }
     }
 

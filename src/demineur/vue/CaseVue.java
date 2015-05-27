@@ -9,6 +9,8 @@ import demineur.controler.CaseListener;
 import demineur.modele.Case;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -51,14 +53,14 @@ public class CaseVue extends JPanel implements Observer {
         super(new BorderLayout());
         this.Case = new Case(x, y);
         this.Case.addObserver(this);
+        this.setSize(60, 60);
         this.setImage("src/img/case_vide.png");
-        this.setSize(10, 10);
         this.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
     public void setImage(String path) throws IOException {
         BufferedImage BI = ImageIO.read(new File(path));
-        pic = new ImageIcon(BI);
+        pic = new ImageIcon(BI.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
         JLabel label = new JLabel(pic);
         this.add(label);
         this.updateUI();
