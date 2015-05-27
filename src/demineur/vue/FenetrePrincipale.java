@@ -62,7 +62,8 @@ public class FenetrePrincipale extends JFrame {
         int y = jeu.getY();
         this.setLayout(new BorderLayout());
         this.menu_bar = new JMenuBar();
-        menu_bar.add(new JLabel("Menu"));
+        menu_bar.add(new JMenu("Menu"));     // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES LABEL AVANT DE L'ADD
+        
         this.corps = new JPanel();
         this.grille = new JPanel(new GridLayout(x, y));
 
