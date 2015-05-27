@@ -46,19 +46,18 @@ public class CaseListener implements MouseListener {
         CaseVue b = (CaseVue)e.getSource();
         if(e.getButton() == MouseEvent.BUTTON3)
         {
-            System.out.println("flag de la case ["+b.getCase().getX()+","+b.getCase().getY()+"]"+" ="+b.getCase().isFlagged());
+            System.out.println("flag de la case ["+b.getCase().getX()+","+b.getCase().getY()+"]"+" = "+b.getCase().isFlagged());
             b.getCase().setFlagged(!b.getCase().isFlagged());
-            System.out.println("flag ="+b.getCase().isFlagged());
+            System.out.println("flag = "+b.getCase().isFlagged());
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-   }
+    }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -67,13 +66,5 @@ public class CaseListener implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        CaseVue b = (CaseVue)e.getSource();
-//        System.out.println("flag de la case ["+b.getCase().getX()+","+b.getCase().getY()+"]"+" ="+b.getCase().isFlagged());
-//        b.getCase().setFlagged(!b.getCase().isFlagged());
-//        System.out.println("flag ="+b.getCase().isFlagged());    }
 }
