@@ -48,33 +48,34 @@ public class Jeu extends Observable {
     }
     private HashMap<Case, Position> HM;
     private HashMap<Position, Case> HMR;
+    private Position[][] positions;
 
     public ArrayList<Case> getVoisins(Case c) {
         ArrayList<Case> voisins = new ArrayList<>();
         int x = c.getX(), y = c.getY();
         if (x != 0) {
             if (y != 0) {
-                voisins.add(HMR.get(new Position(x - 1, y - 1)));
+                voisins.add(HMR.get(positions[x - 1][y - 1]));
             }
             if (y != taille_y - 1) {
-                voisins.add(HMR.get(new Position(x - 1, y + 1)));
+                voisins.add(HMR.get(positions[x - 1][y + 1]));
             }
-            voisins.add(HMR.get(new Position(x - 1, y)));
+            voisins.add(HMR.get(positions[x - 1][y]));
         }
         if (x != taille_x - 1) {
             if (y != 0) {
-                voisins.add(HMR.get(new Position(x + 1, y - 1)));
+                voisins.add(HMR.get(positions[x + 1][y - 1]));
             }
             if (y != taille_y - 1) {
-                voisins.add(HMR.get(new Position(x + 1, y + 1)));
+                voisins.add(HMR.get(positions[x + 1][y + 1]));
             }
-            voisins.add(HMR.get(new Position(x + 1, y)));
+            voisins.add(HMR.get(positions[x + 1][y]));
         }
         if (y != taille_y - 1) {
-            voisins.add(HMR.get(new Position(x, y + 1)));
+            voisins.add(HMR.get(positions[x][y + 1]));
         }
         if (y != 0) {
-            voisins.add(HMR.get(new Position(x, y - 1)));
+            voisins.add(HMR.get(positions[x][y - 1]));
         }
 
         return voisins;
@@ -85,7 +86,7 @@ public class Jeu extends Observable {
     }
 
     public void setJeu() {
-        Jeu bobby=this;
+        Jeu bobby = this;
         for (int i = 0; i < this.taille_x; i++) {
             for (int j = 0; j < this.taille_y; j++) {
                 cases[i][j].setJeu(bobby);
@@ -117,17 +118,23 @@ public class Jeu extends Observable {
         this.taille_x = x;
         this.taille_y = y;
         this.cases = new Case[x][y];
+        this.positions = new Position[x][y];
         this.HM = new HashMap();
         this.HMR = new HashMap();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 cases[i][j] = new Case(i, j);
-                HM.put(cases[i][j], new Position(i, j));
-                HMR.put(new Position(i, j), cases[i][j]);
+                positions[i][j] = new Position(i, j);
+                if (HM.put(cases[i][j], positions[i][j]) == null) {
+                    System.out.println("insertion hashmap ok");
+                }
+                if (HMR.put(positions[i][j], cases[i][j]) == null) {
+                    System.out.println("insertion HMR ok");
+                }
             }
         }
+        Random xpos = new Random(), ypos = new Random();
         while (nb_mines > 0) {
-            Random xpos = new Random(), ypos = new Random();
             int X = xpos.nextInt(this.taille_x);
             int Y = ypos.nextInt(this.taille_y);
             if (!cases[X][Y].isMined()) {
