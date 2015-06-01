@@ -76,6 +76,7 @@ public class Jeu extends Observable {
         if (y != 0) {
             voisins.add(HMR.get(new Position(x, y - 1)));
         }
+
         return voisins;
     }
 
@@ -83,7 +84,14 @@ public class Jeu extends Observable {
         return taille_x;
     }
 
-
+    public void setJeu() {
+        Jeu bobby=this;
+        for (int i = 0; i < this.taille_x; i++) {
+            for (int j = 0; j < this.taille_y; j++) {
+                cases[i][j].setJeu(bobby);
+            }
+        }
+    }
 
     public void setX(int x) {
         this.taille_x = x;
@@ -97,6 +105,14 @@ public class Jeu extends Observable {
         this.taille_y = y;
     }
 
+    public Case[][] getCases() {
+        return cases;
+    }
+
+    public void setCases(Case[][] cases) {
+        this.cases = cases;
+    }
+
     public Jeu(int x, int y, int nb_mines) {
         this.taille_x = x;
         this.taille_y = y;
@@ -108,16 +124,15 @@ public class Jeu extends Observable {
                 cases[i][j] = new Case(i, j);
                 HM.put(cases[i][j], new Position(i, j));
                 HMR.put(new Position(i, j), cases[i][j]);
-                cases[i][j].setJeu(this);
             }
         }
-        while(nb_mines > 0){
-            Random xpos=new Random(), ypos=new Random();
+        while (nb_mines > 0) {
+            Random xpos = new Random(), ypos = new Random();
             int X = xpos.nextInt(this.taille_x);
             int Y = ypos.nextInt(this.taille_y);
-            if(!cases[X][Y].isMined()){
-            cases[X][Y].setMined(true);
-            nb_mines--;
+            if (!cases[X][Y].isMined()) {
+                cases[X][Y].setMined(true);
+                nb_mines--;
             }
         }
     }

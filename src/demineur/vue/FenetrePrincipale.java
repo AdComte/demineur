@@ -69,7 +69,7 @@ public class FenetrePrincipale extends JFrame {
 
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
-                CaseVue cv = new CaseVue(i, j);
+                CaseVue cv = new CaseVue(i, j, this.jeu);
                 cv.addMouseListener(new CaseListener(this.jeu, this));
                 this.grille.add(cv);
             }
