@@ -9,7 +9,6 @@ import demineur.controler.CaseListener;
 import demineur.modele.Case;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -70,16 +69,23 @@ public class CaseVue extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         this.removeAll();
         try {
-            if (this.Case.isFlagged()) {
+
+            if (this.Case.isFlagged()) 
+            {
                 this.setImage("src/img/flag.png");
-            } else if (!this.Case.isFlagged()) {
+            } 
+            else if (!this.Case.isRevealed())
+            {
                 this.setImage("src/img/case_vide.png");
             } else if (this.Case.isRevealed() && this.Case.isMined()) {
                 this.setImage("src/img/bombe.png");
             } else if (this.Case.isRevealed() && !this.Case.isMined()) {
                 this.setImage("src/img/case_vide_revelee.png");
             }
-            
+            else
+            {
+                //TODO : Afficher le numéro de la case
+            }
         } catch (IOException ex) {
             Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);
         }
