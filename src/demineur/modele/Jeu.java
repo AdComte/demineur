@@ -17,8 +17,8 @@ import java.util.Random;
 public class Jeu extends Observable {
 
     private Case[][] cases;
-    private int taille_x, taille_y;
-
+    private int taille_x, taille_y, revelees;
+    
     public class Position {
 
         private int x;
@@ -81,15 +81,31 @@ public class Jeu extends Observable {
         return voisins;
     }
 
+    public int getRevelees() {
+        return revelees;
+    }
+
+    public void setRevelees(int revelees) {
+        this.revelees = revelees;
+    }
+
     public int getX() {
         return taille_x;
     }
 
-    public void setJeu() {
-        Jeu bobby = this;
+    public void revealAll() {
         for (int i = 0; i < this.taille_x; i++) {
             for (int j = 0; j < this.taille_y; j++) {
-                cases[i][j].setJeu(bobby);
+                this.cases[i][j].setRevealed(true);
+            }
+        } setChanged();
+        notifyObservers();
+    }
+
+    public void setJeu() {
+        for (int i = 0; i < this.taille_x; i++) {
+            for (int j = 0; j < this.taille_y; j++) {
+                cases[i][j].setJeu(this);
             }
         }
     }
@@ -117,6 +133,7 @@ public class Jeu extends Observable {
     public Jeu(int x, int y, int nb_mines) {
         this.taille_x = x;
         this.taille_y = y;
+        this.revelees = 0;
         this.cases = new Case[x][y];
         this.positions = new Position[x][y];
         this.HM = new HashMap();

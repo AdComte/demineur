@@ -53,6 +53,7 @@ public class CaseVue extends JPanel implements Observer {
     public CaseVue(int x, int y, Jeu jeu) throws IOException {
         super(new BorderLayout());
         this.Case = jeu.getCases()[x][y];
+        this.Case.trouverBombes_Adjacentes();
         this.Case.addObserver(this);
         this.setSize(60, 60);
         this.setImage("src/img/case_vide.png");
@@ -77,10 +78,10 @@ public class CaseVue extends JPanel implements Observer {
             } else if (!this.Case.isRevealed()) {
                 this.setImage("src/img/case_vide.png");
             } else if (this.Case.isRevealed() && this.Case.isMined()) {
-                this.setImage("src/img/bombe.png");
+                this.setImage("src/img/explode.png");
             } else if (this.Case.isRevealed() && !this.Case.isMined()) {
                 this.setImage("src/img/case_vide_revelee.png");
-                Case.trouverBombes_Adjacentes();
+                if(Case.getBombes_adjacentes()!=0){
                 JLabel numero = new JLabel(Integer.toString(Case.getBombes_adjacentes()), JLabel.CENTER);
                 numero.setBackground(new Color(0, 0, 0, 255));
                 numero.setOpaque(false);
@@ -88,6 +89,7 @@ public class CaseVue extends JPanel implements Observer {
                 numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 40));
                 //TODO : faire la mise en forme du JLabel pour un affichage propre du numéro
                 this.add(numero);
+                }
             }
         } catch (IOException ex) {
             Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);
