@@ -72,6 +72,9 @@ public class Case extends Observable {
     
     public void estClique(boolean flag)
     {
+        //flag == true --> clic droit
+        //flag == false --> clic gauche
+        
         if (flag)
         {
             if (!this.isRevealed())
@@ -85,14 +88,21 @@ public class Case extends Observable {
             if(!this.isFlagged())
             {
                 this.setRevealed(true);
-                if()
-                //etape 1 : réveler la case
-                //etape 2 :
-                    //si c'est une bombe, le joueur a perdu
-                    //si c'est un nombre, on le laisse tel quel
-                    //si c'est un 0, on récupère la liste des adjacents, et on les révèle
-                
-                //TODO : Logique du clic gauche et de la révélation des cases adjacentes ou non / bombe fin de partie / valeur de la case
+                if(this.isMined())
+                {
+                    //faire perdre le joueur
+                }
+                else
+                {
+                    if(this.getBombe_adjacentes() == 0)
+                    {
+                        ArrayList<Case> voisins = this.getVoisins();
+                        for(Case v : voisins)
+                        {
+                            v.estClique(false);
+                        }
+                    }
+                }
                 //Ne pas oublier de décompter le nombre de cases restantes à reveler pour le compteur de fin de partie
             }
         }
