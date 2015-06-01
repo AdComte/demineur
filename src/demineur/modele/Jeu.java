@@ -8,6 +8,7 @@ package demineur.modele;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Random;
 
 /**
  *
@@ -16,7 +17,7 @@ import java.util.Observable;
 public class Jeu extends Observable {
 
     private Case[][] cases;
-    private int taille_x, taille_y;
+    private int taille_x, taille_y, bombes_adjacentes;
 
     public class Position {
 
@@ -94,9 +95,10 @@ public class Jeu extends Observable {
         this.taille_y = y;
     }
 
-    public Jeu(int x, int y) {
+    public Jeu(int x, int y, int nb_mines) {
         this.taille_x = x;
         this.taille_y = y;
+        this.bombes_adjacentes = 0;
         this.cases = new Case[x][y];
         this.HM = new HashMap();
         this.HMR = new HashMap();
@@ -106,6 +108,15 @@ public class Jeu extends Observable {
                 HM.put(cases[i][j], new Position(i, j));
                 HMR.put(new Position(i, j), cases[i][j]);
                 cases[i][j].setJeu(this);
+            }
+        }
+        while(nb_mines > 0){
+            Random xpos=new Random(), ypos=new Random();
+            int X = xpos.nextInt(this.taille_x);
+            int Y = ypos.nextInt(this.taille_y);
+            if(!cases[X][Y].isMined()){
+            cases[X][Y].setMined(true);
+            nb_mines--;
             }
         }
     }

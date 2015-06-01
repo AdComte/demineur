@@ -16,6 +16,7 @@ public class Case extends Observable {
 
     private boolean flagged;
     private boolean revealed;
+    private boolean mined;
     private Jeu jeu;
     private final int x, y;
     
@@ -37,12 +38,20 @@ public class Case extends Observable {
     public int getY() {
         return y;
     }
-
     public Case(int x, int y) {
         this.x = x;
         this.y = y;
         this.flagged = false;
         this.revealed = false;
+        this.mined = false;
+    }
+
+    public boolean isMined() {
+        return mined;
+    }
+
+    public void setMined(boolean mined) {
+        this.mined = mined;
     }
 
     public boolean isFlagged() {
