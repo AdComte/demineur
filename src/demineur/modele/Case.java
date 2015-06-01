@@ -23,9 +23,6 @@ public class Case extends Observable {
 
     public ArrayList<Case> getVoisins() {
         ArrayList<Case> voisins;
-        if (this.jeu == null) {
-            System.out.println("POURQUOI ?????????");
-        }
         voisins = this.jeu.getVoisins(this);
         return voisins;
     }
@@ -34,8 +31,9 @@ public class Case extends Observable {
         return revealed;
     }
 
-    private void setRevealed(boolean revealed) {
+    public void setRevealed(boolean revealed) {
         this.revealed = revealed;
+        this.jeu.setRevelees(this.jeu.getRevelees()+1);
     }
 
     public void trouverBombes_Adjacentes() {
@@ -99,30 +97,21 @@ public class Case extends Observable {
     public void estClique(boolean flag) {
         //flag == true --> clic droit
         //flag == false --> clic gauche
-
         if (!this.isRevealed()) {
             if (flag) {
                 this.setFlagged(!this.isFlagged());
                 //Mis à jour du compteur de bombes restantes dans la grille à -1 / +1 si on en rajoute un un jour
-
             } else {
                 if (!this.isFlagged()) {
                     this.setRevealed(true);
                     if (this.isMined()) {
-                        //faire perdre le joueur
+                        this.jeu.revealAll();//faire perdre le joueur
+                        
                     } else {
                         if (this.getBombes_adjacentes() == 0) {
-                            if (this.getVoisins() != null) {
-                                ArrayList<Case> voisins = this.getVoisins();
-                                for (Case v : voisins) {
-                                    if (v != null) {
-                                        v.estClique(false);
-                                    } else {
-                                        System.out.println("voisins ne contient rien");
-                                    }
-                                }
-                            } else {
-                                System.out.println("On a un probleme : getvoisins est null");
+                            ArrayList<Case> voisins = this.getVoisins();
+                            for (Case v : voisins) {
+                                v.estClique(false);
                             }
                         }
                     }
@@ -130,7 +119,6 @@ public class Case extends Observable {
                 }
             }
         }
-
         setChanged();
         notifyObservers();
     }
