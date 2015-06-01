@@ -23,10 +23,10 @@ public class Case extends Observable {
 
     public ArrayList<Case> getVoisins() {
         ArrayList<Case> voisins;
-        if(this.jeu == null){
+        if (this.jeu == null) {
             System.out.println("POURQUOI ?????????");
         }
-        voisins=this.jeu.getVoisins(this);
+        voisins = this.jeu.getVoisins(this);
         return voisins;
     }
 
@@ -100,37 +100,37 @@ public class Case extends Observable {
         //flag == true --> clic droit
         //flag == false --> clic gauche
 
-        if (flag) {
-            if (!this.isRevealed()) {
+        if (!this.isRevealed()) {
+            if (flag) {
                 this.setFlagged(!this.isFlagged());
                 //Mis à jour du compteur de bombes restantes dans la grille à -1 / +1 si on en rajoute un un jour
-            }
-        } else {
-            if (!this.isFlagged()) {
-                this.setRevealed(true);
-                if (this.isMined()) {
-                    //faire perdre le joueur
-                } else {
-                    if (this.getBombes_adjacentes() == 0) {
-                        if(this.getVoisins()!=null){
-                        ArrayList<Case> voisins = this.getVoisins();
-                        for (Case v : voisins) {
-                            if(v != null){
-                            v.estClique(false);
+
+            } else {
+                if (!this.isFlagged()) {
+                    this.setRevealed(true);
+                    if (this.isMined()) {
+                        //faire perdre le joueur
+                    } else {
+                        if (this.getBombes_adjacentes() == 0) {
+                            if (this.getVoisins() != null) {
+                                ArrayList<Case> voisins = this.getVoisins();
+                                for (Case v : voisins) {
+                                    if (v != null) {
+                                        v.estClique(false);
+                                    } else {
+                                        System.out.println("voisins ne contient rien");
+                                    }
+                                }
                             } else {
-                                System.out.println("voisins ne contient rien");
+                                System.out.println("On a un probleme : getvoisins est null");
                             }
-                        }} else {
-                            System.out.println("On a un probleme : getvoisins est null");
                         }
                     }
-                }
-                //Ne pas oublier de décompter le nombre de cases restantes à reveler pour le compteur de fin de partie
-                {
-
+                    //Ne pas oublier de décompter le nombre de cases restantes à reveler pour le compteur de fin de partie
                 }
             }
         }
+
         setChanged();
         notifyObservers();
     }

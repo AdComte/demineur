@@ -10,6 +10,7 @@ import demineur.modele.Case;
 import demineur.modele.Jeu;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -29,26 +30,26 @@ import javax.swing.JPanel;
  * @author Vladimir
  */
 public class CaseVue extends JPanel implements Observer {
-    
+
     private Case Case;
     private ImageIcon pic;
-    
+
     public Case getCase() {
         return Case;
     }
-    
+
     public ImageIcon getPic() {
         return pic;
     }
-    
+
     public void setPic(ImageIcon pic) {
         this.pic = pic;
     }
-    
+
     public void setCase(Case Case) {
         this.Case = Case;
     }
-    
+
     public CaseVue(int x, int y, Jeu jeu) throws IOException {
         super(new BorderLayout());
         this.Case = jeu.getCases()[x][y];
@@ -57,7 +58,7 @@ public class CaseVue extends JPanel implements Observer {
         this.setImage("src/img/case_vide.png");
         this.setBorder(BorderFactory.createLineBorder(Color.black));
     }
-    
+
     public void setImage(String path) throws IOException {
         BufferedImage BI = ImageIO.read(new File(path));
         pic = new ImageIcon(BI.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
@@ -65,26 +66,26 @@ public class CaseVue extends JPanel implements Observer {
         this.add(label);
         this.updateUI();
     }
-    
+
     @Override
     public void update(Observable o, Object arg) {
         this.removeAll();
         try {
 
-            if (this.Case.isFlagged()) 
-            {
+            if (this.Case.isFlagged()) {
                 this.setImage("src/img/flag.png");
-            } 
-            else if (!this.Case.isRevealed())
-            {
+            } else if (!this.Case.isRevealed()) {
                 this.setImage("src/img/case_vide.png");
             } else if (this.Case.isRevealed() && this.Case.isMined()) {
                 this.setImage("src/img/bombe.png");
             } else if (this.Case.isRevealed() && !this.Case.isMined()) {
                 this.setImage("src/img/case_vide_revelee.png");
-                JLabel numero = new JLabel();
+                JLabel numero = new JLabel(Integer.toString(Case.getBombes_adjacentes()), JLabel.CENTER);
+                numero.setBackground(new Color(0, 0, 0, 255));
+                numero.setOpaque(false);
+                numero.setFocusable(false);
+                numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 40));
                 //TODO : faire la mise en forme du JLabel pour un affichage propre du numéro
-                numero.setText(Integer.toString(Case.getBombes_adjacentes()));
                 this.add(numero);
             }
         } catch (IOException ex) {
