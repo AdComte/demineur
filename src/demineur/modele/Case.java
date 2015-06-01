@@ -19,16 +19,35 @@ public class Case extends Observable {
     private boolean mined;
     private Jeu jeu;
     private final int x, y;
-    
-    public ArrayList<Case> getVoisins(){
+    private int bombes_adjacentes;
+
+    public ArrayList<Case> getVoisins() {
         return this.jeu.getVoisins(this);
     }
+
     public boolean isRevealed() {
         return revealed;
     }
 
     private void setRevealed(boolean revealed) {
         this.revealed = revealed;
+    }
+
+    public void trouverBombes_Adjacentes() {
+        ArrayList<Case> voisins = this.getVoisins();
+        for (Case c : voisins) {
+            if (c.isMined()) {
+                this.bombes_adjacentes++;
+            }
+        }
+    }
+
+    public int getBombes_adjacentes() {
+        return bombes_adjacentes;
+    }
+
+    public void setBombes_adjacentes(int bombes_adjacentes) {
+        this.bombes_adjacentes = bombes_adjacentes;
     }
 
     public int getX() {
@@ -38,8 +57,10 @@ public class Case extends Observable {
     public int getY() {
         return y;
     }
+
     public Case(int x, int y) {
         this.x = x;
+        this.bombes_adjacentes = 0;
         this.y = y;
         this.flagged = false;
         this.revealed = false;
@@ -82,11 +103,8 @@ public class Case extends Observable {
                 this.setFlagged(!this.isFlagged());
                 //Mis à jour du compteur de bombes restantes dans la grille à -1 / +1 si on en rajoute un un jour
             }
-        }
-        else
-        {
-            if(!this.isFlagged())
-            {
+        } else {
+            if (!this.isFlagged()) {
                 this.setRevealed(true);
                 if(this.isMined())
                 {
@@ -104,11 +122,14 @@ public class Case extends Observable {
                     }
                 }
                 //Ne pas oublier de décompter le nombre de cases restantes à reveler pour le compteur de fin de partie
+                {
+                    
+                }
             }
         }
         setChanged();
         notifyObservers();
     }
-    
+
     //Ajouter une fonction logique d'initialisation qui parcourt les voisins et qui compte les bombes voisines, seulement si la case n'est pas une bombe elle même
 }

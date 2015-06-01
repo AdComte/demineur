@@ -21,7 +21,7 @@ public class Demineur {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        Jeu jeu = new Jeu(10, 10);
+        Jeu jeu = new Jeu(10, 10, 10);
         FenetrePrincipale FP = new FenetrePrincipale(jeu);
         FP.setResizable(false);     //verrouille la taille de la fenêtre
         FP.setLocation(200,200);
