@@ -81,10 +81,10 @@ public class CaseVue extends JPanel implements Observer {
                 this.setImage("src/img/bombe.png");
             } else if (this.Case.isRevealed() && !this.Case.isMined()) {
                 this.setImage("src/img/case_vide_revelee.png");
-            }
-            else
-            {
-                //TODO : Afficher le numéro de la case
+                JLabel numero = new JLabel();
+                //TODO : faire la mise en forme du JLabel pour un affichage propre du numéro
+                numero.setText(Integer.toString(Case.getBombes_adjacentes()));
+                this.add(numero);
             }
         } catch (IOException ex) {
             Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);

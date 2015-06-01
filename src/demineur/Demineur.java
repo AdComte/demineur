@@ -24,7 +24,7 @@ public class Demineur {
         Jeu jeu = new Jeu(10, 10, 10);
         FenetrePrincipale FP = new FenetrePrincipale(jeu);
         FP.setResizable(false);     //verrouille la taille de la fenêtre
-        FP.setLocation(200,200);
+        FP.setLocation(200, 100);
         FP.setPreferredSize(new Dimension(600,600));
         FP.setTitle("Jeu du Démineur -- COMTE && MOURIER");
         //Ajouter un mini logo en haut à gauche de l'application avec la ligne si dessous

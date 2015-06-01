@@ -112,7 +112,7 @@ public class Case extends Observable {
                 }
                 else
                 {
-                    if(this.getBombe_adjacentes() == 0)
+                    if(this.getBombes_adjacentes() == 0)
                     {
                         ArrayList<Case> voisins = this.getVoisins();
                         for(Case v : voisins)
