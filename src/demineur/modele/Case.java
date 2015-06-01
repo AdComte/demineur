@@ -19,16 +19,35 @@ public class Case extends Observable {
     private boolean mined;
     private Jeu jeu;
     private final int x, y;
-    
-    public ArrayList<Case> getVoisins(){
+    private int bombes_adjacentes;
+
+    public ArrayList<Case> getVoisins() {
         return this.jeu.getVoisins(this);
     }
+
     public boolean isRevealed() {
         return revealed;
     }
 
     private void setRevealed(boolean revealed) {
         this.revealed = revealed;
+    }
+
+    public void trouverBombes_Adjacentes() {
+        ArrayList<Case> voisins = this.getVoisins();
+        for (Case c : voisins) {
+            if (c.isMined()) {
+                this.bombes_adjacentes++;
+            }
+        }
+    }
+
+    public int getBombes_adjacentes() {
+        return bombes_adjacentes;
+    }
+
+    public void setBombes_adjacentes(int bombes_adjacentes) {
+        this.bombes_adjacentes = bombes_adjacentes;
     }
 
     public int getX() {
@@ -38,8 +57,10 @@ public class Case extends Observable {
     public int getY() {
         return y;
     }
+
     public Case(int x, int y) {
         this.x = x;
+        this.bombes_adjacentes = 0;
         this.y = y;
         this.flagged = false;
         this.revealed = false;
@@ -70,21 +91,15 @@ public class Case extends Observable {
         System.out.println("Entree dans setFlag");
         this.flagged = flagged;
     }
-    
-    public void estClique(boolean flag)
-    {
-        if (flag)
-        {
-            if (!this.isRevealed())
-            {
+
+    public void estClique(boolean flag) {
+        if (flag) {
+            if (!this.isRevealed()) {
                 this.setFlagged(!this.isFlagged());
                 //Mis à jour d'un compteur de bombe restante à -1 / +1 si on en rajoute un un jour
             }
-        }
-        else
-        {
-            if(!this.isFlagged())
-            {
+        } else {
+            if (!this.isFlagged()) {
                 //TODO : Logique du clic gauche et de la révélation des cases adjacentes ou non / bombe fin de partie / valeur de la case
                 //Ne pas oublier de décompter le nombre de cases restantes à reveler
             }
@@ -92,6 +107,6 @@ public class Case extends Observable {
         setChanged();
         notifyObservers();
     }
-    
+
     //Ajouter une fonction logique d'initialisation qui parcourt les voisins et qui compte les bombes voisines, seulement si la case n'est pas une bombe elle même
 }

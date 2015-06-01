@@ -18,7 +18,7 @@ import java.util.Random;
 public class Jeu extends Observable {
 
     private Case[][] cases;
-    private int taille_x, taille_y, bombes_adjacentes;
+    private int taille_x, taille_y;
 
     public class Position {
 
@@ -84,6 +84,8 @@ public class Jeu extends Observable {
         return taille_x;
     }
 
+
+
     public void setX(int x) {
         this.taille_x = x;
     }
@@ -99,7 +101,6 @@ public class Jeu extends Observable {
     public Jeu(int x, int y, int nb_mines) {
         this.taille_x = x;
         this.taille_y = y;
-        this.bombes_adjacentes = 0;
         this.cases = new Case[x][y];
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
