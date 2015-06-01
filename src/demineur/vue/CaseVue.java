@@ -80,6 +80,7 @@ public class CaseVue extends JPanel implements Observer {
                 this.setImage("src/img/bombe.png");
             } else if (this.Case.isRevealed() && !this.Case.isMined()) {
                 this.setImage("src/img/case_vide_revelee.png");
+                Case.trouverBombes_Adjacentes();
                 JLabel numero = new JLabel(Integer.toString(Case.getBombes_adjacentes()), JLabel.CENTER);
                 numero.setBackground(new Color(0, 0, 0, 255));
                 numero.setOpaque(false);
