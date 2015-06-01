@@ -6,7 +6,6 @@
 package demineur.modele;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -99,6 +98,8 @@ public class Jeu extends Observable {
         this.taille_x = x;
         this.taille_y = y;
         this.cases = new Case[x][y];
+        this.HM = new HashMap();
+        this.HMR = new HashMap();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 cases[i][j] = new Case(i, j);

@@ -58,7 +58,6 @@ public class Case extends Observable {
     }
 
     public void setFlagged(boolean flagged) {
-        System.out.println("Entree dans setFlag");
         this.flagged = flagged;
     }
     
@@ -76,8 +75,16 @@ public class Case extends Observable {
         {
             if(!this.isFlagged())
             {
+                this.setRevealed(true);
+                if()
+                //etape 1 : réveler la case
+                //etape 2 :
+                    //si c'est une bombe, le joueur a perdu
+                    //si c'est un nombre, on le laisse tel quel
+                    //si c'est un 0, on récupère la liste des adjacents, et on les révèle
+                
                 //TODO : Logique du clic gauche et de la révélation des cases adjacentes ou non / bombe fin de partie / valeur de la case
-                //Ne pas oublier de décompter le nombre de cases restantes à reveler
+                //Ne pas oublier de décompter le nombre de cases restantes à reveler pour le compteur de fin de partie
             }
         }
         setChanged();

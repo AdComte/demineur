@@ -69,10 +69,17 @@ public class CaseVue extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         this.removeAll();
         try {
-            if (this.Case.isFlagged() == true) {
+            if (this.Case.isFlagged()) 
+            {
                 this.setImage("src/img/flag.png");
-            } else {
+            } 
+            else if (!this.Case.isRevealed())
+            {
                 this.setImage("src/img/case_vide.png");
+            }
+            else
+            {
+                //TODO : Afficher le numéro de la case
             }
         } catch (IOException ex) {
             Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);

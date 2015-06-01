@@ -43,14 +43,14 @@ public class CaseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        CaseVue b = (CaseVue)e.getSource();
+        CaseVue c = (CaseVue)e.getSource();
         if(e.getButton() == MouseEvent.BUTTON3)
         {
-            b.getCase().estClique(true);
+            c.getCase().estClique(true);
         }
         else if(e.getButton() == MouseEvent.BUTTON1)
         {
-            b.getCase().estClique(false);
+            c.getCase().estClique(false);
         }
     }
 
