@@ -27,7 +27,7 @@ public class Demineur {
         FP.setLocation(200,200);
         FP.setPreferredSize(new Dimension(600,600));
         FP.setTitle("Jeu du Démineur -- COMTE && MOURIER");
-        //Ajouter un mini logo en haut à gauche avec la ligne si dessous
+        //Ajouter un mini logo en haut à gauche de l'application avec la ligne si dessous
         //f.setIconImage(Toolkit.getDefaultToolkit().getImage(Appli0.class.getResource("/icone.gif")));
         FP.pack();
         CaseListener cl = new CaseListener(jeu, FP);

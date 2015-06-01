@@ -55,7 +55,7 @@ public class Case extends Observable {
             if (!this.isRevealed())
             {
                 this.setFlagged(!this.isFlagged());
-                //Mis à jour d'un compteur de bombe restante à -1 / +1 si on en rajoute un un jour
+                //Mis à jour du compteur de bombes restantes dans la grille à -1 / +1 si on en rajoute un un jour
             }
         }
         else
