@@ -22,6 +22,7 @@ public class Demineur {
      */
     public static void main(String[] args) throws IOException {
         Jeu jeu = new Jeu(10, 10, 10);
+        jeu.setJeu();
         FenetrePrincipale FP = new FenetrePrincipale(jeu);
         FP.setResizable(false);     //verrouille la taille de la fenêtre
         FP.setLocation(200, 100);

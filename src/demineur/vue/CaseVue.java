@@ -7,6 +7,7 @@ package demineur.vue;
 
 import demineur.controler.CaseListener;
 import demineur.modele.Case;
+import demineur.modele.Jeu;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -48,9 +49,9 @@ public class CaseVue extends JPanel implements Observer {
         this.Case = Case;
     }
     
-    public CaseVue(int x, int y) throws IOException {
+    public CaseVue(int x, int y, Jeu jeu) throws IOException {
         super(new BorderLayout());
-        this.Case = new Case(x, y);
+        this.Case = jeu.getCases()[x][y];
         this.Case.addObserver(this);
         this.setSize(60, 60);
         this.setImage("src/img/case_vide.png");
