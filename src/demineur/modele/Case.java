@@ -112,17 +112,11 @@ public class Case extends Observable {
                     //faire perdre le joueur
                 } else {
                     if (this.getBombes_adjacentes() == 0) {
-                        if(this.getVoisins()!=null){
                         ArrayList<Case> voisins = this.getVoisins();
                         for (Case v : voisins) {
                             if(v != null){
                             v.estClique(false);
-                            } else {
-                                System.out.println("voisins ne contient rien");
                             }
-                        }} else {
-                            System.out.println("On a un probleme : getvoisins est null");
-                        }
                     }
                 }
                 //Ne pas oublier de décompter le nombre de cases restantes à reveler pour le compteur de fin de partie
@@ -130,6 +124,7 @@ public class Case extends Observable {
 
                 }
             }
+        }
         }
         setChanged();
         notifyObservers();
