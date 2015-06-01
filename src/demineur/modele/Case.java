@@ -5,6 +5,7 @@
  */
 package demineur.modele;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -15,9 +16,13 @@ public class Case extends Observable {
 
     private boolean flagged;
     private boolean revealed;
+    private Jeu jeu;
     private final int x, y;
-
-    private boolean isRevealed() {
+    
+    public ArrayList<Case> getVoisins(){
+        return this.jeu.getVoisins(this);
+    }
+    public boolean isRevealed() {
         return revealed;
     }
 
@@ -44,7 +49,16 @@ public class Case extends Observable {
         return flagged;
     }
 
-    private void setFlagged(boolean flagged) {
+    public Jeu getJeu() {
+        return jeu;
+    }
+
+    public void setJeu(Jeu jeu) {
+        this.jeu = jeu;
+    }
+
+    public void setFlagged(boolean flagged) {
+        System.out.println("Entree dans setFlag");
         this.flagged = flagged;
     }
     
