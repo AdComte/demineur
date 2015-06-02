@@ -33,7 +33,9 @@ public class Case extends Observable {
 
     public void setRevealed(boolean revealed) {
         this.revealed = revealed;
-        this.jeu.setRevelees(this.jeu.getRevelees()+1);
+        this.jeu.setRevelees(this.jeu.getRevelees() + 1);
+        setChanged();
+        notifyObservers();
     }
 
     public void trouverBombes_Adjacentes() {
@@ -92,6 +94,8 @@ public class Case extends Observable {
 
     public void setFlagged(boolean flagged) {
         this.flagged = flagged;
+        setChanged();
+        notifyObservers();
     }
 
     public void estClique(boolean flag) {
@@ -104,9 +108,10 @@ public class Case extends Observable {
             } else {
                 if (!this.isFlagged()) {
                     this.setRevealed(true);
+                    this.jeu.nb_cases_dec();
                     if (this.isMined()) {
-                        this.jeu.revealAll();//faire perdre le joueur
-                        
+                        this.jeu.revealAll(false);//faire perdre le joueur
+
                     } else {
                         if (this.getBombes_adjacentes() == 0) {
                             ArrayList<Case> voisins = this.getVoisins();
@@ -119,8 +124,6 @@ public class Case extends Observable {
                 }
             }
         }
-        setChanged();
-        notifyObservers();
     }
 
     //Ajouter une fonction logique d'initialisation qui parcourt les voisins et qui compte les bombes voisines, seulement si la case n'est pas une bombe elle même

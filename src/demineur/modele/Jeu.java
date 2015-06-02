@@ -18,7 +18,7 @@ public class Jeu extends Observable {
 
     private Case[][] cases;
     private int taille_x, taille_y, revelees;
-    
+
     public class Position {
 
         private int x;
@@ -49,6 +49,12 @@ public class Jeu extends Observable {
     private HashMap<Case, Position> HM;
     private HashMap<Position, Case> HMR;
     private Position[][] positions;
+    private int nb_mines, nb_cases_restantes;
+    private boolean victoire;
+
+    public boolean isVictoire() {
+        return victoire;
+    }
 
     public ArrayList<Case> getVoisins(Case c) {
         ArrayList<Case> voisins = new ArrayList<>();
@@ -81,6 +87,14 @@ public class Jeu extends Observable {
         return voisins;
     }
 
+    public int getNb_mines() {
+        return nb_mines;
+    }
+
+    public int getNb_cases_restantes() {
+        return nb_cases_restantes;
+    }
+
     public int getRevelees() {
         return revelees;
     }
@@ -93,12 +107,14 @@ public class Jeu extends Observable {
         return taille_x;
     }
 
-    public void revealAll() {
+    public void revealAll(boolean victoire) {
+        this.victoire = victoire;
         for (int i = 0; i < this.taille_x; i++) {
             for (int j = 0; j < this.taille_y; j++) {
                 this.cases[i][j].setRevealed(true);
             }
-        } setChanged();
+        }
+        setChanged();
         notifyObservers();
     }
 
@@ -130,10 +146,23 @@ public class Jeu extends Observable {
         this.cases = cases;
     }
 
+    public void nb_cases_dec() {
+        this.nb_cases_restantes--;
+        if (this.nb_cases_restantes == this.nb_mines) {
+            setChanged();
+            notifyObservers();
+            this.revealAll(true);
+            //la partie est gagnée
+        }
+    }
+
     public Jeu(int x, int y, int nb_mines) {
         this.taille_x = x;
         this.taille_y = y;
+        this.nb_mines = nb_mines;
+        this.nb_cases_restantes = x * y;
         this.revelees = 0;
+        this.victoire = false;
         this.cases = new Case[x][y];
         this.positions = new Position[x][y];
         this.HM = new HashMap();

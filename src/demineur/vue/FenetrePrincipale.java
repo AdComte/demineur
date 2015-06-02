@@ -11,12 +11,14 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Vladimir
  */
-public class FenetrePrincipale extends JFrame {
+public class FenetrePrincipale extends JFrame implements Observer{
 
     private JMenuBar menu_bar;
     private JPanel corps;
@@ -58,11 +60,14 @@ public class FenetrePrincipale extends JFrame {
     public FenetrePrincipale(Jeu jeu) throws IOException {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jeu=jeu;
+        this.jeu.addObserver(this);
         int x = jeu.getX();
         int y = jeu.getY();
         this.setLayout(new BorderLayout());
         this.menu_bar = new JMenuBar();
-        menu_bar.add(new JMenu("Menu"));     // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
+        JMenu Menu = new JMenu("Menu");
+             // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
+        menu_bar.add(Menu);
         
         this.corps = new JPanel();
         this.grille = new JPanel(new GridLayout(x, y));
@@ -78,6 +83,14 @@ public class FenetrePrincipale extends JFrame {
         this.add(menu_bar, BorderLayout.NORTH);
         this.add(corps);
         this.add(grille, BorderLayout.CENTER);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(this.jeu.getNb_cases_restantes() > this.jeu.getNb_mines())
+            JOptionPane.showMessageDialog(null, "Partie Perdue", "Defaite", JOptionPane.ERROR_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(null, "Partie Gagnée", "Victoire", JOptionPane.INFORMATION_MESSAGE);
     }
 
 }
