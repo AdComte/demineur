@@ -166,8 +166,12 @@ public class Jeu extends Observable {
         for (int i = 0; i < this.taille_x; i++) {
             for (int j = 0; j < this.taille_y; j++) {
                 cases[i][j].setJeu(this);
+                if(cases[i][j].isMined()){System.out.print("x |");}else{System.out.print("  |");}
+                if(j==this.taille_x-1){System.out.println();}
             }
         }
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void setX(int x) {
