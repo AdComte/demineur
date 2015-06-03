@@ -49,11 +49,11 @@ public class Case extends Observable {
             } else {
                 if (!this.isFlagged()) {
                     this.setRevealed(true);
-                    this.jeu.nb_cases_dec();
                     if (this.isMined()) {
                         this.jeu.revealAll(false);//faire perdre le joueur
 
                     } else {
+                        this.jeu.nb_cases_dec();
                         if (this.getBombes_adjacentes() == 0) {
                             ArrayList<Case> voisins = this.getVoisins();
                             for (Case v : voisins) {
