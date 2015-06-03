@@ -32,6 +32,43 @@ public class FenetrePrincipale extends JFrame implements Observer {
     private JButton bouton_diff, bouton_perso;
     private ButtonGroup group_radio;
 
+    public FenetrePrincipale() throws IOException {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new BorderLayout());
+        //Instanciation des composants de jeu :
+        this.menu_bar = new JMenuBar();
+        MenuItem_parametres = new JMenuItem("Paramètres");
+        JMenu Menu = new JMenu("Menu");
+        Menu.add(MenuItem_parametres);
+        this.grille = new JPanel(new GridLayout());
+
+        rbMenuItem1 = new JRadioButtonMenuItem("Facile");
+        rbMenuItem1.setSelected(true);
+        rbMenuItem1.setMnemonic(KeyEvent.VK_E);
+        rbMenuItem1.setActionCommand("Facile");
+
+        rbMenuItem2 = new JRadioButtonMenuItem("Moyen");
+        rbMenuItem2.setMnemonic(KeyEvent.VK_M);
+        rbMenuItem2.setActionCommand("Moyen");
+
+        rbMenuItem3 = new JRadioButtonMenuItem("Difficile");
+        rbMenuItem3.setMnemonic(KeyEvent.VK_H);
+        rbMenuItem3.setActionCommand("Difficile");
+
+        bouton_diff = new JButton("Jouer");
+
+        height_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
+        width_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
+        mines_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
+
+        bouton_perso = new JButton("Jouer");
+
+        // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
+        menu_bar.add(Menu);
+        this.add(menu_bar, BorderLayout.NORTH);
+        this.setFenetreMenu();
+    }
+
     public void setFenetreJeu(Jeu jeu) throws IOException {
 
         if (corps != null) {
@@ -70,36 +107,21 @@ public class FenetrePrincipale extends JFrame implements Observer {
         JLabel difficulty_label = new JLabel("Choisissez un niveau de difficulté");
         panel1.add(difficulty_label);
 
-        rbMenuItem1 = new JRadioButtonMenuItem("Facile");
-        rbMenuItem1.setSelected(true);
-        rbMenuItem1.setMnemonic(KeyEvent.VK_E);
-        rbMenuItem1.setActionCommand("Facile");
         group_radio.add(rbMenuItem1);
         panel1.add(rbMenuItem1);
 
-        rbMenuItem2 = new JRadioButtonMenuItem("Moyen");
-        rbMenuItem2.setMnemonic(KeyEvent.VK_M);
-        rbMenuItem2.setActionCommand("Moyen");
         group_radio.add(rbMenuItem2);
         panel1.add(rbMenuItem2);
 
-        rbMenuItem3 = new JRadioButtonMenuItem("Difficile");
-        rbMenuItem3.setMnemonic(KeyEvent.VK_H);
-        rbMenuItem3.setActionCommand("Difficile");
         group_radio.add(rbMenuItem3);
         panel1.add(rbMenuItem3);
 
-        bouton_diff = new JButton("Jouer");
         panel1.add(bouton_diff);
         corps.add(panel1, BorderLayout.NORTH);
 
         JPanel panel2 = new JPanel();
         JLabel personnalise = new JLabel("Paramtrez votre grille de jeu : ");
         panel2.add(personnalise);
-
-        height_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
-        width_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
-        mines_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
 
         JLabel label_height = new JLabel("Hauteur");
         panel2.add(label_height);
@@ -113,26 +135,11 @@ public class FenetrePrincipale extends JFrame implements Observer {
         panel2.add(label_mines);
         panel2.add(mines_spinner);
 
-        bouton_perso = new JButton("Jouer");
         panel2.add(bouton_perso);
         this.corps.add(panel2, BorderLayout.CENTER);
         this.add(corps);
         this.revalidate();
 
-    }
-
-    public FenetrePrincipale() throws IOException {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
-        this.menu_bar = new JMenuBar();
-        MenuItem_parametres = new JMenuItem("Paramètres");
-        JMenu Menu = new JMenu("Menu");
-        Menu.add(MenuItem_parametres);
-        this.grille = new JPanel(new GridLayout());
-        // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
-        menu_bar.add(Menu);
-        this.add(menu_bar, BorderLayout.NORTH);
-        this.setFenetreMenu();
     }
 
     @Override

@@ -59,6 +59,7 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getSource());
         if (e.getSource().equals(this.fenetre.getBouton_diff())) {
             //Lancer une nouvelle partie selon la difficulté
             if (this.fenetre.getGroup_radio().getSelection().getActionCommand().equals("Facile")) {
@@ -83,6 +84,7 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
             this.listenToGame();
             try {
                 this.fenetre.setFenetreJeu(this.jeu);
+                this.listenToGame();
             } catch (IOException ex) {
                 Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);
             }
