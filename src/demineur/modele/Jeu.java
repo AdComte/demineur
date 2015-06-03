@@ -76,6 +76,9 @@ public class Jeu extends Observable {
             }
         }
         Random xpos = new Random(), ypos = new Random();
+        if(nb_mines> taille_x*taille_y){
+            nb_mines = taille_x*taille_y-1;
+        }
         while (nb_mines > 0) {
             int X = xpos.nextInt(this.taille_x);
             int Y = ypos.nextInt(this.taille_y);
