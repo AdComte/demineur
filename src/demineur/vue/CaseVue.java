@@ -34,21 +34,7 @@ public class CaseVue extends JPanel implements Observer {
     private Case Case;
     private ImageIcon pic;
 
-    public Case getCase() {
-        return Case;
-    }
 
-    public ImageIcon getPic() {
-        return pic;
-    }
-
-    public void setPic(ImageIcon pic) {
-        this.pic = pic;
-    }
-
-    public void setCase(Case Case) {
-        this.Case = Case;
-    }
 
     public CaseVue(int x, int y, Jeu jeu) throws IOException {
         super(new BorderLayout());
@@ -99,5 +85,20 @@ public class CaseVue extends JPanel implements Observer {
             Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.updateUI();
+    }
+        public Case getCase() {
+        return Case;
+    }
+
+    public ImageIcon getPic() {
+        return pic;
+    }
+
+    public void setPic(ImageIcon pic) {
+        this.pic = pic;
+    }
+
+    public void setCase(Case Case) {
+        this.Case = Case;
     }
 }

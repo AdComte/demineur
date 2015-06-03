@@ -21,47 +21,6 @@ public class Case extends Observable {
     private final int x, y;
     private int bombes_adjacentes;
 
-    public ArrayList<Case> getVoisins() {
-        ArrayList<Case> voisins;
-        voisins = this.jeu.getVoisins(this);
-        return voisins;
-    }
-
-    public boolean isRevealed() {
-        return revealed;
-    }
-
-    public void setRevealed(boolean revealed) {
-        this.revealed = revealed;
-        this.jeu.setRevelees(this.jeu.getRevelees() + 1);
-        setChanged();
-        notifyObservers();
-    }
-
-    public void trouverBombes_Adjacentes() {
-        ArrayList<Case> voisins = this.getVoisins();
-        for (Case c : voisins) {
-            if (c.isMined()) {
-                this.bombes_adjacentes++;
-            }
-        }
-    }
-
-    public int getBombes_adjacentes() {
-        return bombes_adjacentes;
-    }
-
-    public void setBombes_adjacentes(int bombes_adjacentes) {
-        this.bombes_adjacentes = bombes_adjacentes;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 
     public Case(int x, int y) {
         this.x = x;
@@ -72,32 +31,14 @@ public class Case extends Observable {
         this.mined = false;
     }
 
-    public boolean isMined() {
-        return mined;
+    public void trouverBombes_Adjacentes() {
+        ArrayList<Case> voisins = this.getVoisins();
+        for (Case c : voisins) {
+            if (c.isMined()) {
+                this.bombes_adjacentes++;
+            }
+        }
     }
-
-    public void setMined(boolean mined) {
-        this.mined = mined;
-    }
-
-    public boolean isFlagged() {
-        return flagged;
-    }
-
-    public Jeu getJeu() {
-        return jeu;
-    }
-
-    public void setJeu(Jeu jeu) {
-        this.jeu = jeu;
-    }
-
-    public void setFlagged(boolean flagged) {
-        this.flagged = flagged;
-        setChanged();
-        notifyObservers();
-    }
-
     public void estClique(boolean flag) {
         //flag == true --> clic droit
         //flag == false --> clic gauche
@@ -127,4 +68,66 @@ public class Case extends Observable {
     }
 
     //Ajouter une fonction logique d'initialisation qui parcourt les voisins et qui compte les bombes voisines, seulement si la case n'est pas une bombe elle même
+    
+
+
+//Getters et setters
+    public boolean isMined() {
+        return mined;
+    }
+
+    public void setMined(boolean mined) {
+        this.mined = mined;
+    }
+
+    public boolean isFlagged() {
+        return flagged;
+    }
+
+    public Jeu getJeu() {
+        return jeu;
+    }
+
+    public void setJeu(Jeu jeu) {
+        this.jeu = jeu;
+    }
+
+    public void setFlagged(boolean flagged) {
+        this.flagged = flagged;
+        setChanged();
+        notifyObservers();
+    }
+
+
+    public int getBombes_adjacentes() {
+        return bombes_adjacentes;
+    }
+
+    public void setBombes_adjacentes(int bombes_adjacentes) {
+        this.bombes_adjacentes = bombes_adjacentes;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+    public ArrayList<Case> getVoisins() {
+        ArrayList<Case> voisins;
+        voisins = this.jeu.getVoisins(this);
+        return voisins;
+    }
+        public boolean isRevealed() {
+        return revealed;
+    }
+
+    public void setRevealed(boolean revealed) {
+        this.revealed = revealed;
+        this.jeu.setRevelees(this.jeu.getRevelees() + 1);
+        setChanged();
+        notifyObservers();
+    }
+
 }

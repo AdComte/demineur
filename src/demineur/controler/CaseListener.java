@@ -27,10 +27,16 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
     private Jeu jeu;
     private FenetrePrincipale fenetre;
 
+    public CaseListener(Jeu jeu, FenetrePrincipale fenetre) {
+        this.jeu = jeu;
+        this.fenetre = fenetre;
+    }
+
     public void listenToGame() {
         if (this.jeu != null) {
             for (int i = 0; i < jeu.getX(); i++) {
                 for (int j = 0; j < jeu.getY(); j++) {
+                    if(this.getFenetre().getGrille()==null){System.out.println("grille nulle");}
                     if(this.getFenetre().getGrille().getComponentAt(i, j)==null){
                         System.out.println("Composant "+ i + " ; " + j + " de la grille est nul");
                     } else {
@@ -38,27 +44,6 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
                 }
             }
         }
-    }
-
-    public Jeu getJeu() {
-        return jeu;
-    }
-
-    public void setJeu(Jeu jeu) {
-        this.jeu = jeu;
-    }
-
-    public FenetrePrincipale getFenetre() {
-        return fenetre;
-    }
-
-    public void setFenetre(FenetrePrincipale fenetre) {
-        this.fenetre = fenetre;
-    }
-
-    public CaseListener(Jeu jeu, FenetrePrincipale fenetre) {
-        this.jeu = jeu;
-        this.fenetre = fenetre;
     }
 
     @Override
@@ -69,22 +54,6 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
         } else if (e.getButton() == MouseEvent.BUTTON1) {
             c.getCase().estClique(false);
         }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
     }
 
     @Override
@@ -127,4 +96,38 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
     public void itemStateChanged(ItemEvent e) {
         System.out.println("itemStateChanged");
     }
+    
+    
+    public Jeu getJeu() {
+        return jeu;
+    }
+
+    public void setJeu(Jeu jeu) {
+        this.jeu = jeu;
+    }
+
+    public FenetrePrincipale getFenetre() {
+        return fenetre;
+    }
+
+    public void setFenetre(FenetrePrincipale fenetre) {
+        this.fenetre = fenetre;
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
 }

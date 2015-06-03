@@ -52,10 +52,39 @@ public class Jeu extends Observable {
     private int nb_mines, nb_cases_restantes;
     private boolean victoire;
 
-    public boolean isVictoire() {
-        return victoire;
+    public Jeu(int x, int y, int nb_mines) {
+        this.taille_x = x;
+        this.taille_y = y;
+        this.nb_mines = nb_mines;
+        this.nb_cases_restantes = x * y;
+        this.revelees = 0;
+        this.victoire = false;
+        this.cases = new Case[x][y];
+        this.positions = new Position[x][y];
+        this.HM = new HashMap();
+        this.HMR = new HashMap();
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                cases[i][j] = new Case(i, j);
+                positions[i][j] = new Position(i, j);
+                if (HM.put(cases[i][j], positions[i][j]) == null) {
+//                    System.out.println("insertion hashmap ok");
+                }
+                if (HMR.put(positions[i][j], cases[i][j]) == null) {
+//                    System.out.println("insertion HMR ok");
+                }
+            }
+        }
+        Random xpos = new Random(), ypos = new Random();
+        while (nb_mines > 0) {
+            int X = xpos.nextInt(this.taille_x);
+            int Y = ypos.nextInt(this.taille_y);
+            if (!cases[X][Y].isMined()) {
+                cases[X][Y].setMined(true);
+                nb_mines--;
+            }
+        }
     }
-
     public ArrayList<Case> getVoisins(Case c) {
         ArrayList<Case> voisins = new ArrayList<>();
         int x = c.getX(), y = c.getY();
@@ -86,6 +115,32 @@ public class Jeu extends Observable {
 
         return voisins;
     }
+    
+    public void revealAll(boolean victoire) {
+        this.victoire = victoire;
+        for (int i = 0; i < this.taille_x; i++) {
+            for (int j = 0; j < this.taille_y; j++) {
+                this.cases[i][j].setRevealed(true);
+            }
+        }
+        setChanged();
+        notifyObservers();
+    }
+
+    public void nb_cases_dec() {
+        this.nb_cases_restantes--;
+        if (this.nb_cases_restantes == this.nb_mines) {
+            setChanged();
+            notifyObservers();
+            this.revealAll(true);
+            //la partie est gagnée
+        }
+    }
+
+//setters et getters
+    public boolean isVictoire() {
+        return victoire;
+    }
 
     public int getNb_mines() {
         return nb_mines;
@@ -105,17 +160,6 @@ public class Jeu extends Observable {
 
     public int getX() {
         return taille_x;
-    }
-
-    public void revealAll(boolean victoire) {
-        this.victoire = victoire;
-        for (int i = 0; i < this.taille_x; i++) {
-            for (int j = 0; j < this.taille_y; j++) {
-                this.cases[i][j].setRevealed(true);
-            }
-        }
-        setChanged();
-        notifyObservers();
     }
 
     public void setJeu() {
