@@ -193,6 +193,4 @@ public class Jeu extends Observable {
     public void setCases(Case[][] cases) {
         this.cases = cases;
     }
-
-
 }

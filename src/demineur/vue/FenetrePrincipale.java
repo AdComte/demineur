@@ -10,7 +10,6 @@ import demineur.modele.Jeu;
 import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Observable;
