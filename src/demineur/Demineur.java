@@ -21,8 +21,8 @@ public class Demineur {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        Jeu jeu = new Jeu(10, 10, 10);
-        jeu.setJeu();
+//        Jeu jeu = new Jeu(10, 10, 10);
+//        jeu.setJeu();
         FenetrePrincipale FP = new FenetrePrincipale();
         FP.setResizable(false);     //verrouille la taille de la fenêtre
         FP.setLocation(200, 100);
@@ -40,7 +40,7 @@ public class Demineur {
         //Ajouter un mini logo en haut à gauche de l'application avec la ligne si dessous
         //f.setIconImage(Toolkit.getDefaultToolkit().getImage(Appli0.class.getResource("/icone.gif")));
         FP.pack();
-        CaseListener cl = new CaseListener(jeu, FP);
+        CaseListener cl = new CaseListener(FP);
         cl.getFenetre().getMenuItem_parametres().addActionListener(cl);
         cl.getFenetre().getBouton_diff().addActionListener(cl);
         cl.getFenetre().getBouton_perso().addActionListener(cl);

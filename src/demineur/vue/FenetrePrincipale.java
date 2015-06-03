@@ -29,9 +29,15 @@ public class FenetrePrincipale extends JFrame implements Observer {
     private JRadioButtonMenuItem rbMenuItem1, rbMenuItem2, rbMenuItem3;
     private JSpinner height_spinner, width_spinner, mines_spinner;
     private JButton bouton_diff, bouton_perso;
+    private ButtonGroup group_radio;
 
     public void setFenetreJeu(Jeu jeu) throws IOException {
-        if(corps!=null){this.remove(corps);}
+
+        if (corps != null) {
+            this.remove(corps);
+        }
+
+        jeu.setJeu();
         this.jeu = jeu;
         this.jeu.addObserver(this);
         int x = jeu.getX();
@@ -46,14 +52,19 @@ public class FenetrePrincipale extends JFrame implements Observer {
                 this.grille.add(cv);
             }
         }
+        //setContentPane(grille);
         this.add(grille, BorderLayout.CENTER);
+        this.revalidate();
+
     }
 
-    public void setFenetreMenu() {
-        if(grille!=null){this.remove(grille);}
+    public final void setFenetreMenu() {
+        if (grille != null) {
+            this.remove(grille);
+        }
         this.corps = new JPanel(new BorderLayout());
         JPanel panel1 = new JPanel();
-        ButtonGroup group_radio = new ButtonGroup();
+        group_radio = new ButtonGroup();
 
         JLabel difficulty_label = new JLabel("Choisissez un niveau de difficulté");
         panel1.add(difficulty_label);
@@ -85,9 +96,9 @@ public class FenetrePrincipale extends JFrame implements Observer {
         JLabel personnalise = new JLabel("Paramtrez votre grille de jeu : ");
         panel2.add(personnalise);
 
-        height_spinner = new JSpinner(new SpinnerNumberModel(0,0,1000,1));
-        width_spinner = new JSpinner(new SpinnerNumberModel(0,0,1000,1));
-        mines_spinner = new JSpinner(new SpinnerNumberModel(0,0,1000,1));
+        height_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
+        width_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
+        mines_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
 
         JLabel label_height = new JLabel("Hauteur");
         panel2.add(label_height);
@@ -105,6 +116,8 @@ public class FenetrePrincipale extends JFrame implements Observer {
         panel2.add(bouton_perso);
         this.corps.add(panel2, BorderLayout.CENTER);
         this.add(corps);
+        this.revalidate();
+
     }
 
     public FenetrePrincipale() throws IOException {
@@ -114,6 +127,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
         MenuItem_parametres = new JMenuItem("Paramètres");
         JMenu Menu = new JMenu("Menu");
         Menu.add(MenuItem_parametres);
+        this.grille = new JPanel(new GridLayout());
         // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
         menu_bar.add(Menu);
         this.add(menu_bar, BorderLayout.NORTH);
@@ -129,6 +143,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
         }
     }
 // Getters & Setters
+
     public JRadioButtonMenuItem getRbMenuItem1() {
         return rbMenuItem1;
     }
@@ -192,6 +207,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
     public void setMines_spinner(JSpinner mines_spinner) {
         this.mines_spinner = mines_spinner;
     }
+
     public JMenuBar getMenu_bar() {
         return menu_bar;
     }
@@ -231,4 +247,13 @@ public class FenetrePrincipale extends JFrame implements Observer {
     public void setJeu(Jeu jeu) {
         this.jeu = jeu;
     }
+
+    public ButtonGroup getGroup_radio() {
+        return group_radio;
+    }
+
+    public void setGroup_radio(ButtonGroup group_radio) {
+        this.group_radio = group_radio;
+    }
+
 }
