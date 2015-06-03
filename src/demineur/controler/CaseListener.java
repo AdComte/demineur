@@ -31,7 +31,8 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
         this.jeu = jeu;
         this.fenetre = fenetre;
     }
-    public CaseListener (FenetrePrincipale fenetre){
+
+    public CaseListener(FenetrePrincipale fenetre) {
         this.fenetre = fenetre;
     }
 
@@ -39,11 +40,8 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
         if (this.jeu != null) {
             for (int i = 0; i < jeu.getX(); i++) {
                 for (int j = 0; j < jeu.getY(); j++) {
-                    if(this.getFenetre().getGrille()==null){System.out.println("grille nulle");}
-                    if(this.getFenetre().getGrille().getComponentAt(i, j)==null){
-                        System.out.println("Composant "+ i + " ; " + j + " de la grille est nul");
-                    } else {
-                    this.getFenetre().getGrille().getComponentAt(i, j).addMouseListener(this);}
+
+                    this.getFenetre().getGrille().getComponentAt(i, j).addMouseListener(this);
                 }
             }
         }
@@ -63,7 +61,7 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(this.fenetre.getBouton_diff())) {
             //Lancer une nouvelle partie selon la difficulté
-            if(this.fenetre.getGroup_radio().getSelection().getActionCommand().equals("Facile")){
+            if (this.fenetre.getGroup_radio().getSelection().getActionCommand().equals("Facile")) {
                 this.jeu = new Jeu(10, 10, 15);
             } else if (this.fenetre.getGroup_radio().getSelection().getActionCommand().equals("Moyen")) {
                 this.jeu = new Jeu(20, 20, 40);
@@ -72,7 +70,6 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
                 this.jeu = new Jeu(50, 50, 100);
             }
             try {
-                if(this.jeu==null){System.out.println("le jeu est nul");}
                 this.fenetre.setFenetreJeu(this.jeu);
                 this.listenToGame();
             } catch (IOException ex) {
@@ -93,17 +90,14 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
             //On affiche la page des paramètres
             this.fenetre.setFenetreMenu();
         }
-        
-        
-        
+
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
         System.out.println("itemStateChanged");
     }
-    
-    
+
     public Jeu getJeu() {
         return jeu;
     }

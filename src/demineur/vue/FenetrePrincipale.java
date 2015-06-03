@@ -33,13 +33,11 @@ public class FenetrePrincipale extends JFrame implements Observer {
     private ButtonGroup group_radio;
 
     public void setFenetreJeu(Jeu jeu) throws IOException {
-        
+
         if (corps != null) {
             this.remove(corps);
         }
-        
-        
-        
+
         jeu.setJeu();
         this.jeu = jeu;
         this.jeu.addObserver(this);
@@ -47,7 +45,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
         int y = jeu.getY();
 
         this.grille = new JPanel(new GridLayout(x, y));
-        
+
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 CaseVue cv = new CaseVue(i, j, this.jeu);
@@ -58,13 +56,13 @@ public class FenetrePrincipale extends JFrame implements Observer {
         //setContentPane(grille);
         this.add(grille, BorderLayout.CENTER);
         this.revalidate();
-        
+
     }
 
     public final void setFenetreMenu() {
-//        if (grille != null) {
-//            this.remove(grille);
-//        }
+        if (grille != null) {
+            this.remove(grille);
+        }
         this.corps = new JPanel(new BorderLayout());
         JPanel panel1 = new JPanel();
         group_radio = new ButtonGroup();
@@ -119,6 +117,8 @@ public class FenetrePrincipale extends JFrame implements Observer {
         panel2.add(bouton_perso);
         this.corps.add(panel2, BorderLayout.CENTER);
         this.add(corps);
+        this.revalidate();
+
     }
 
     public FenetrePrincipale() throws IOException {
@@ -256,5 +256,5 @@ public class FenetrePrincipale extends JFrame implements Observer {
     public void setGroup_radio(ButtonGroup group_radio) {
         this.group_radio = group_radio;
     }
-    
+
 }

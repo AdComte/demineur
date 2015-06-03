@@ -116,7 +116,6 @@ public class Case extends Observable {
     }
     public ArrayList<Case> getVoisins() {
         ArrayList<Case> voisins;
-        if(this.jeu == null){System.out.println("le jeu est nul dans la case" + this.x + " ; " + this.y);}
         voisins = this.jeu.getVoisins(this);
         return voisins;
     }
