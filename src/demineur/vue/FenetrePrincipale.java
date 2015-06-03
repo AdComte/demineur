@@ -32,7 +32,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
     private JButton bouton_diff, bouton_perso;
 
     public void setFenetreJeu(Jeu jeu) throws IOException {
-        this.remove(corps);
+        if(corps!=null){this.remove(corps);}
         this.jeu = jeu;
         this.jeu.addObserver(this);
         int x = jeu.getX();
@@ -51,6 +51,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
     }
 
     public void setFenetreMenu() {
+        if(grille!=null){this.remove(grille);}
         this.corps = new JPanel(new BorderLayout());
         JPanel panel1 = new JPanel();
         ButtonGroup group_radio = new ButtonGroup();
