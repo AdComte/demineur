@@ -144,10 +144,12 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (this.jeu.getNb_cases_restantes() > this.jeu.getNb_mines()) {
-            JOptionPane.showMessageDialog(null, "Partie Perdue", "Defaite", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Partie Gagnée", "Victoire", JOptionPane.INFORMATION_MESSAGE);
+        if (this.jeu.isVictoire() == false) {
+            if (this.jeu.getNb_cases_restantes() > this.jeu.getNb_mines()) {
+                JOptionPane.showMessageDialog(null, "Partie Perdue", "Defaite", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Partie Gagnée", "Victoire", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 // Getters & Setters
