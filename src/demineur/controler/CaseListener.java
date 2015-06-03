@@ -70,6 +70,7 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
                 this.jeu = new Jeu(50, 50, 100);
             }
             try {
+                this.fenetre.setJeu(jeu);
                 this.fenetre.setFenetreJeu(this.jeu);
                 this.listenToGame();
             } catch (IOException ex) {
