@@ -172,10 +172,10 @@ public class Jeu extends Observable {
                 cases[i][j] = new Case(i, j);
                 positions[i][j] = new Position(i, j);
                 if (HM.put(cases[i][j], positions[i][j]) == null) {
-                    System.out.println("insertion hashmap ok");
+//                    System.out.println("insertion hashmap ok");
                 }
                 if (HMR.put(positions[i][j], cases[i][j]) == null) {
-                    System.out.println("insertion HMR ok");
+//                    System.out.println("insertion HMR ok");
                 }
             }
         }
