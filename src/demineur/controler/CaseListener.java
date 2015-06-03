@@ -40,8 +40,11 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
         if (this.jeu != null) {
             for (int i = 0; i < jeu.getX(); i++) {
                 for (int j = 0; j < jeu.getY(); j++) {
-
-                    this.getFenetre().getGrille().getComponentAt(i, j).addMouseListener(this);
+                    if (this.getFenetre().getGrille().getComponentAt(i, j) == null) {
+                        System.out.println("Composant " + i + " ; " + j + " de la grille est nul");
+                    } else {
+                        this.getFenetre().getGrille().getComponentAt(i, j).addMouseListener(this);
+                    }
                 }
             }
         }
