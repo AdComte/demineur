@@ -100,7 +100,6 @@ public class FenetrePrincipale extends JFrame implements Observer {
         else if(x<25 && y<25)    this.setPreferredSize(new Dimension(40*x, 40*y));
         else    this.setPreferredSize(new Dimension(30*x, 30*y));
         this.add(grille, BorderLayout.CENTER);
-        this.menu_bar.add(new JLabel("                              " + "Il vous reste" + (this.jeu.getNb_mines() - this.jeu.getNb_drapeaux()) + "bombes à désamorcer"));
         this.pack();
         this.revalidate();
     }
