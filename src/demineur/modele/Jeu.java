@@ -49,13 +49,14 @@ public class Jeu extends Observable {
     private HashMap<Case, Position> HM;
     private HashMap<Position, Case> HMR;
     private Position[][] positions;
-    private int nb_mines, nb_cases_restantes;
+    private int nb_mines, nb_cases_restantes, nb_drapeaux;
     private boolean victoire;
 
     public Jeu(int x, int y, int nb_mines) {
         this.taille_x = x;
         this.taille_y = y;
         this.nb_mines = nb_mines;
+        this.nb_drapeaux=0;
         this.nb_cases_restantes = x * y;
         this.revelees = 0;
         this.victoire = false;
@@ -139,8 +140,16 @@ public class Jeu extends Observable {
             //la partie est gagnée
         }
     }
+    
+    public int getNb_drapeaux() {
+        return nb_drapeaux;
+    }
 
 //setters et getters
+    public void setNb_drapeaux(int nb_drapeaux) {    
+        this.nb_drapeaux = nb_drapeaux;
+    }
+
     public boolean isVictoire() {
         return victoire;
     }

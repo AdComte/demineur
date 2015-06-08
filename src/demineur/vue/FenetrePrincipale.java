@@ -56,14 +56,17 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
         bouton_diff = new JButton("Jouer");
 
-        height_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
-        width_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
-        mines_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
+        height_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
+        width_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
+        mines_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
 
         bouton_perso = new JButton("Jouer");
 
         // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
         menu_bar.add(Menu);
+        this.menu_bar.add(new JLabel("                              "
+                + "Il vous reste" + (this.jeu.getNb_mines() - this.jeu.getNb_drapeaux()) + "bombes à désamorcer"));
+
         this.add(menu_bar, BorderLayout.NORTH);
         this.setFenetreMenu();
     }
