@@ -56,7 +56,7 @@ public class Jeu extends Observable {
         this.taille_x = x;
         this.taille_y = y;
         this.nb_mines = nb_mines;
-        this.nb_drapeaux=0;
+        this.nb_drapeaux = 0;
         this.nb_cases_restantes = x * y;
         this.revelees = 0;
         this.victoire = false;
@@ -77,8 +77,8 @@ public class Jeu extends Observable {
             }
         }
         Random xpos = new Random(), ypos = new Random();
-        if(nb_mines> taille_x*taille_y){
-            nb_mines = taille_x*taille_y-1;
+        if (nb_mines > taille_x * taille_y) {
+            nb_mines = taille_x * taille_y - 1;
         }
         while (nb_mines > 0) {
             int X = xpos.nextInt(this.taille_x);
@@ -89,6 +89,7 @@ public class Jeu extends Observable {
             }
         }
     }
+
     public ArrayList<Case> getVoisins(Case c) {
         ArrayList<Case> voisins = new ArrayList<>();
         int x = c.getX(), y = c.getY();
@@ -119,7 +120,7 @@ public class Jeu extends Observable {
 
         return voisins;
     }
-    
+
     public void revealAll(boolean victoire) {
         this.victoire = victoire;
         for (int i = 0; i < this.taille_x; i++) {
@@ -140,14 +141,16 @@ public class Jeu extends Observable {
             //la partie est gagnée
         }
     }
-    
+
     public int getNb_drapeaux() {
         return nb_drapeaux;
     }
 
 //setters et getters
-    public void setNb_drapeaux(int nb_drapeaux) {    
+    public void setNb_drapeaux(int nb_drapeaux) {
         this.nb_drapeaux = nb_drapeaux;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public boolean isVictoire() {
