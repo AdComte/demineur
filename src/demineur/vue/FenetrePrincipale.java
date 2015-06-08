@@ -30,6 +30,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
     private JSpinner height_spinner, width_spinner, mines_spinner;
     private JButton bouton_diff, bouton_perso;
     private ButtonGroup group_radio;
+    private JLabel menu_label;
 
     public FenetrePrincipale() throws IOException {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,8 +63,9 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
         bouton_perso = new JButton("Jouer");
 
+        this.menu_label = new JLabel();
+        // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
         menu_bar.add(Menu);
-        
 
         this.add(menu_bar, BorderLayout.NORTH);
         this.setFenetreMenu();
@@ -90,6 +92,9 @@ public class FenetrePrincipale extends JFrame implements Observer {
                 this.grille.add(cv);
             }
         }
+        this.menu_label.setText("                              "//Espace l'affichage
+                + "Il vous reste" + (this.jeu.getNb_mines() - this.jeu.getNb_drapeaux()) + "bombes à désamorcer");
+        this.menu_bar.add(this.menu_label);
         //setContentPane(grille);
         if(x<15 && y<15)    this.setPreferredSize(new Dimension(60*x, 60*y));
         else if(x<25 && y<25)    this.setPreferredSize(new Dimension(40*x, 40*y));
@@ -101,6 +106,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
     }
 
     public final void setFenetreMenu() {
+        this.menu_bar.remove(this.menu_label);
         if (grille != null) {
             this.remove(grille);
         }
