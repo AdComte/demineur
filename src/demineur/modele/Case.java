@@ -38,9 +38,13 @@ public class Case extends Observable {
             }
         }
     }
-    public void estClique(boolean flag) {
-        //flag == true --> clic droit
-        //flag == false --> clic gauche
+
+    public void estClique(boolean flag, boolean voisin) {
+        //flag == true --> clic droit -- mettre un drapeau
+        //flag == false --> clic gauche -- révéler la case
+        //voisin == true --> parcours des voisins pour les révéler
+        //voisin == false --> parcours normal
+        
         if (!this.isRevealed()) {
             if (flag) {
                 this.setFlagged(!this.isFlagged());
@@ -56,17 +60,25 @@ public class Case extends Observable {
                         if (this.getBombes_adjacentes() == 0) {
                             ArrayList<Case> voisins = this.getVoisins();
                             for (Case v : voisins) {
-                                v.estClique(false);
+                                v.estClique(false, false);
                             }
+                        }
+                    }
+                }
+            }
+        } else { //TODO : faire un parcours correct pour révélation rapide
+            if (voisin) {
+                if (this.bombes_adjacentes == this.getNBVoisinsFlagged()) {
+                    ArrayList<Case> voisins = this.getVoisins();
+                    for (Case v : voisins) {
+                        if (!v.isRevealed()) {
+                            this.estClique(false, false);
                         }
                     }
                 }
             }
         }
     }
-
-    
-
 
 //Getters et setters
     public boolean isMined() {
@@ -96,7 +108,6 @@ public class Case extends Observable {
         notifyObservers();
     }
 
-
     public int getBombes_adjacentes() {
         return bombes_adjacentes;
     }
@@ -110,7 +121,19 @@ public class Case extends Observable {
         voisins = this.jeu.getVoisins(this);
         return voisins;
     }
-        public boolean isRevealed() {
+
+    public int getNBVoisinsFlagged() {
+        int i = 0;
+        ArrayList<Case> voisins = this.getVoisins();
+        for (Case c : voisins) {
+            if (c.isFlagged()) {
+                i++;
+            }
+        }
+        return i;
+    }
+
+    public boolean isRevealed() {
         return revealed;
     }
 
