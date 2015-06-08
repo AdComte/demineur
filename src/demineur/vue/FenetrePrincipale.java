@@ -56,13 +56,16 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
         bouton_diff = new JButton("Jouer");
 
-        height_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
-        width_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
-        mines_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
+        height_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
+        width_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
+        mines_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
 
         bouton_perso = new JButton("Jouer");
 
         menu_bar.add(Menu);
+        this.menu_bar.add(new JLabel("                              "
+                + "Il vous reste" + (this.jeu.getNb_mines() - this.jeu.getNb_drapeaux()) + "bombes à désamorcer"));
+
         this.add(menu_bar, BorderLayout.NORTH);
         this.setFenetreMenu();
     }
@@ -145,10 +148,12 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (this.jeu.getNb_cases_restantes() > this.jeu.getNb_mines()) {
-            JOptionPane.showMessageDialog(null, "Partie Perdue", "Defaite", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Partie Gagnée", "Victoire", JOptionPane.INFORMATION_MESSAGE);
+        if (this.jeu.isVictoire() == false) {
+            if (this.jeu.getNb_cases_restantes() > this.jeu.getNb_mines()) {
+                JOptionPane.showMessageDialog(null, "Partie Perdue", "Defaite", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Partie Gagnée", "Victoire", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 // Getters & Setters

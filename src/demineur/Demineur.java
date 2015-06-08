@@ -28,15 +28,6 @@ public class Demineur {
         FP.setLocation(200, 100);
         FP.setPreferredSize(new Dimension(600, 600));
         FP.setTitle("Jeu du Démineur -- COMTE && MOURIER");
-        // Get the OS style and apply it
-//        try
-//        {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//        }
-//        catch(ClassNotFoundException|InstantiationException|IllegalAccessException|UnsupportedLookAndFeelException e)
-//        {
-//            Logger.getLogger(Demineur.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-//        }
         //Ajouter un mini logo en haut à gauche de l'application avec la ligne si dessous
         //f.setIconImage(Toolkit.getDefaultToolkit().getImage(Appli0.class.getResource("/icone.gif")));
         FP.pack();
