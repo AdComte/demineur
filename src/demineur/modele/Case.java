@@ -30,6 +30,7 @@ public class Case extends Observable {
         this.flagged = false;
         this.revealed = false;
         this.mined = false;
+        this.exploded = false;
     }
 
     public void trouverBombes_Adjacentes() {
@@ -52,6 +53,7 @@ public class Case extends Observable {
                 if (!this.isFlagged()) {
                     this.setRevealed(true);
                     if (this.isMined()) {
+                        this.setExploded(true);
                         this.jeu.revealAll(false);//faire perdre le joueur
 
                     } else {
@@ -63,13 +65,11 @@ public class Case extends Observable {
                             }
                         }
                     }
-                    //Ne pas oublier de décompter le nombre de cases restantes à reveler pour le compteur de fin de partie
                 }
             }
         }
     }
 
-    //Ajouter une fonction logique d'initialisation qui parcourt les voisins et qui compte les bombes voisines, seulement si la case n'est pas une bombe elle même
     
 
 

@@ -63,9 +63,9 @@ public class CaseVue extends JPanel implements Observer {
                 this.setImage("src/img/flag.png");
             } else if (!this.Case.isRevealed()) {
                 this.setImage("src/img/case_vide.png");
-            } else if (this.Case.isRevealed() && this.Case.isMined() && !this.Case.getJeu().isVictoire() && this.Case.isExploded()) {
+            } else if (this.Case.isExploded()) {
                 this.setImage("src/img/explode.png");
-            } else if (this.Case.isMined()) {
+            } else if (this.Case.isMined() && !this.Case.isExploded()) {
                 this.setImage("src/img/bombe.png");
             } else if (this.Case.isRevealed() && !this.Case.isMined()) {
                 this.setImage("src/img/case_vide_revelee.png");
