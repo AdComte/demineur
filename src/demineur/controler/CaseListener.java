@@ -93,7 +93,7 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
             } catch (IOException ex) {
                 Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (e.getSource().equals(this.fenetre.getMenuItem_parametres())) {
+        } else if (e.getSource().equals(this.fenetre.getMenuItem_parametres()) && !this.fenetre.getCorps().isValid()) {
             //On affiche la page des paramètres
             this.fenetre.setFenetreMenu();
         }

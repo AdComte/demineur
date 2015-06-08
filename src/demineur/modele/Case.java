@@ -53,8 +53,7 @@ public class Case extends Observable {
                     this.setRevealed(true);
                     if (this.isMined()) {
                         this.setExploded(true);
-                        this.jeu.revealAll(false);//faire perdre le joueur
-
+                        this.jeu.revealAll(true);//faire perdre le joueur
                     } else {
                         this.jeu.nb_cases_dec();
                         if (this.getBombes_adjacentes() == 0) {
