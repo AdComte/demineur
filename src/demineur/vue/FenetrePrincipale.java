@@ -62,7 +62,6 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
         bouton_perso = new JButton("Jouer");
 
-        // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
         menu_bar.add(Menu);
         this.add(menu_bar, BorderLayout.NORTH);
         this.setFenetreMenu();
@@ -90,9 +89,12 @@ public class FenetrePrincipale extends JFrame implements Observer {
             }
         }
         //setContentPane(grille);
+        if(x<15 && y<15)    this.setPreferredSize(new Dimension(60*x, 60*y));
+        else if(x<25 && y<25)    this.setPreferredSize(new Dimension(40*x, 40*y));
+        else    this.setPreferredSize(new Dimension(30*x, 30*y));
         this.add(grille, BorderLayout.CENTER);
+        this.pack();
         this.revalidate();
-
     }
 
     public final void setFenetreMenu() {

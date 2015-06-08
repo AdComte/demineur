@@ -66,12 +66,13 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
         if (e.getSource().equals(this.fenetre.getBouton_diff())) {
             //Lancer une nouvelle partie selon la difficulté
             if (this.fenetre.getGroup_radio().getSelection().getActionCommand().equals("Facile")) {
-                this.jeu = new Jeu(10, 10, 15);
+                this.jeu = new Jeu(10, 10, 10);
             } else if (this.fenetre.getGroup_radio().getSelection().getActionCommand().equals("Moyen")) {
                 this.jeu = new Jeu(20, 20, 40);
 
             } else if (this.fenetre.getGroup_radio().getSelection().getActionCommand().equals("Difficile")) {
-                this.jeu = new Jeu(50, 50, 100);
+                this.jeu = new Jeu(30, 30, 100);
+                
             }
             try {
                 this.fenetre.setJeu(jeu);
