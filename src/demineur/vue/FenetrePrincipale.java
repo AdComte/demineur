@@ -93,7 +93,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
             }
         }
         this.menu_label.setText("                              "//Espace l'affichage
-                + "Il vous reste" + (this.jeu.getNb_mines() - this.jeu.getNb_drapeaux()) + "bombes à désamorcer");
+                + "Il vous reste " + (this.jeu.getNb_mines() - this.jeu.getNb_drapeaux()) + " bombes à désamorcer");
         this.menu_bar.add(this.menu_label);
         //setContentPane(grille);
         this.add(grille, BorderLayout.CENTER);
@@ -149,7 +149,9 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (this.jeu.isVictoire() == false) {
+        this.menu_label.setText("                              "//Espace l'affichage
+                + "Il vous reste " + (this.jeu.getNb_mines() - this.jeu.getNb_drapeaux()) + " bombes à désamorcer");
+        if (this.jeu.isVictoire() == true) {
             if (this.jeu.getNb_cases_restantes() > this.jeu.getNb_mines()) {
                 JOptionPane.showMessageDialog(null, "Partie Perdue", "Defaite", JOptionPane.ERROR_MESSAGE);
             } else {

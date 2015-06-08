@@ -46,7 +46,6 @@ public class Case extends Observable {
         if (!this.isRevealed()) {
             if (flag) {
                 this.setFlagged(!this.isFlagged());
-                this.jeu.setNb_drapeaux(this.jeu.getNb_drapeaux()+1);
                 //Mis à jour du compteur de bombes restantes dans la grille à -1 / +1 si on en rajoute un un jour
             } else {
                 if (!this.isFlagged()) {
@@ -96,6 +95,7 @@ public class Case extends Observable {
 
     public void setFlagged(boolean flagged) {
         this.flagged = flagged;
+        this.jeu.setNb_drapeaux(this.jeu.getNb_drapeaux()+1);
         setChanged();
         notifyObservers();
     }
