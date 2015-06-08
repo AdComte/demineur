@@ -63,9 +63,9 @@ public class CaseVue extends JPanel implements Observer {
                 this.setImage("src/img/flag.png");
             } else if (!this.Case.isRevealed()) {
                 this.setImage("src/img/case_vide.png");
-            } else if (this.Case.isRevealed() && this.Case.isMined() && !this.Case.getJeu().isVictoire()) {
+            } else if (this.Case.isExploded()) {
                 this.setImage("src/img/explode.png");
-            } else if (this.Case.isMined() && this.Case.getJeu().isVictoire()) {
+            } else if (this.Case.isMined() && !this.Case.isExploded()) {
                 this.setImage("src/img/bombe.png");
             } else if (this.Case.isRevealed() && !this.Case.isMined()) {
                 this.setImage("src/img/case_vide_revelee.png");
@@ -76,7 +76,7 @@ public class CaseVue extends JPanel implements Observer {
                 numero.setOpaque(false);
                 */
                 numero.setFocusable(false);
-                numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 40));
+                numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 30));
                 //TODO : faire la mise en forme du JLabel pour un affichage propre du numéro
                 this.add(numero);
                 }
