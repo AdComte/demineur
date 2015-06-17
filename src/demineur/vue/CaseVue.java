@@ -17,7 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level; 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -34,15 +34,26 @@ public class CaseVue extends JPanel implements Observer {
     private Case Case;
     private ImageIcon pic;
 
-
-
     public CaseVue(int x, int y, Jeu jeu) throws IOException {
         super(new BorderLayout());
         this.Case = jeu.getCases()[x][y];
         this.Case.trouverBombes_Adjacentes();
         this.Case.addObserver(this);
         this.setSize(60, 60);
-        this.setImage("src/img/case_vide.png");
+        if (this.Case.isFlagged()) {
+            this.setImage("src/img/flag.png");
+        } else if (this.Case.isRevealed()) {
+            this.setImage("src/img/case_vide_revelee.png");
+            if (Case.getBombes_adjacentes() != 0) {
+                JLabel numero = new JLabel(Integer.toString(Case.getBombes_adjacentes()), JLabel.CENTER);
+                numero.setFocusable(false);
+                numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 30));
+                this.add(numero);
+            }
+        } else {
+            this.setImage("src/img/case_vide.png");
+        }
+
         this.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
@@ -58,7 +69,7 @@ public class CaseVue extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         this.removeAll();
         try {
-            if(this.Case.isFlagged() && this.Case.getJeu().isVictoire() && !this.Case.isMined()) {
+            if (this.Case.isFlagged() && this.Case.getJeu().isVictoire() && !this.Case.isMined()) {
                 this.setImage("src/img/flag_WRONG.png");
             } else if (this.Case.isFlagged()) {
                 this.setImage("src/img/flag.png");
@@ -70,15 +81,15 @@ public class CaseVue extends JPanel implements Observer {
                 this.setImage("src/img/bombe.png");
             } else if (this.Case.isRevealed() && !this.Case.isMined()) {
                 this.setImage("src/img/case_vide_revelee.png");
-                if(Case.getBombes_adjacentes()!=0){
-                JLabel numero = new JLabel(Integer.toString(Case.getBombes_adjacentes()), JLabel.CENTER);
-                /* SERT POUR LA TRANSPARANCE
-                numero.setBackground(new Color(0, 0, 0, 255));
-                numero.setOpaque(false);
-                */
-                numero.setFocusable(false);
-                numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 30));
-                this.add(numero);
+                if (Case.getBombes_adjacentes() != 0) {
+                    JLabel numero = new JLabel(Integer.toString(Case.getBombes_adjacentes()), JLabel.CENTER);
+                    /* SERT POUR LA TRANSPARANCE
+                     numero.setBackground(new Color(0, 0, 0, 255));
+                     numero.setOpaque(false);
+                     */
+                    numero.setFocusable(false);
+                    numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 30));
+                    this.add(numero);
                 }
             }
         } catch (IOException ex) {
@@ -86,7 +97,8 @@ public class CaseVue extends JPanel implements Observer {
         }
         this.updateUI();
     }
-        public Case getCase() {
+
+    public Case getCase() {
         return Case;
     }
 

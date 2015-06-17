@@ -173,12 +173,14 @@ public class Jeu extends Observable {
                 if (cases[i][j].isRevealed()) {
                     partie += "1\n";
                 } else if (cases[i][j].isFlagged()) {
-                    partie += "2\n";
+                    if (cases[i][j].isMined()) {
+                        partie += "3\n";
+                    } else {
+                        partie += "2\n";
+                    }
                 } else if (cases[i][j].isMined()) {
                     partie += "-1\n";
-                } else if (cases[i][j].isFlagged() && cases[i][j].isMined()) {
-                    partie += "3\n";
-                } else {
+                }else {
                     partie += "0\n";
                 }
             }
@@ -232,7 +234,6 @@ public class Jeu extends Observable {
                             break;
                         case 2:
                             cases[i][j].setFlagged(true);
-                            this.nb_drapeaux++;
                             break;
                         case 3:
                             cases[i][j].setFlagged(true);
