@@ -237,7 +237,6 @@ public class Jeu extends Observable {
                             cases[i][j].setFlagged(true);
                             cases[i][j].setMined(true);
                     }
-                this.cases[i][j].notifyObservers();
                 }
             }
         }
