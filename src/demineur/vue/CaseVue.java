@@ -40,7 +40,6 @@ public class CaseVue extends JPanel implements Observer {
         this.Case.trouverBombes_Adjacentes();
         this.Case.addObserver(this);
         this.setSize(60, 60);
-        this.setImage("src/img/case_vide.png");
         this.update(null, null);
         this.setBorder(BorderFactory.createLineBorder(Color.black));
     }

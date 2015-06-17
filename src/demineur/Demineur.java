@@ -6,9 +6,9 @@
 package demineur;
 
 import demineur.controler.CaseListener;
-import demineur.modele.Jeu;
 import demineur.vue.FenetrePrincipale;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 
 /**
@@ -21,15 +21,12 @@ public class Demineur {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-//        Jeu jeu = new Jeu(10, 10, 10);
-//        jeu.setJeu();
         FenetrePrincipale FP = new FenetrePrincipale();
         FP.setResizable(false);     //verrouille la taille de la fenêtre
         FP.setLocation(200, 100);
         FP.setPreferredSize(new Dimension(600, 600));
         FP.setTitle("Jeu du Démineur -- COMTE && MOURIER");
-        //Ajouter un mini logo en haut à gauche de l'application avec la ligne si dessous
-        //f.setIconImage(Toolkit.getDefaultToolkit().getImage(Appli0.class.getResource("/icone.gif")));
+        FP.setIconImage(Toolkit.getDefaultToolkit().getImage("src/img/logo.jpg"));
         FP.pack();
         CaseListener cl = new CaseListener(FP);
         cl.getFenetre().getMenuItem_parametres().addActionListener(cl);

@@ -30,7 +30,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
     private JSpinner height_spinner, width_spinner, mines_spinner;
     private JButton bouton_diff, bouton_perso;
     private ButtonGroup group_radio;
-    private JLabel menu_label, chrono_label;
+    private JLabel menu_label;
 
     public FenetrePrincipale() throws IOException {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,8 +69,6 @@ public class FenetrePrincipale extends JFrame implements Observer {
         bouton_perso = new JButton("Jouer");
 
         this.menu_label = new JLabel();
-        this.chrono_label = new JLabel();
-        // TODO : IL FAUT INSTANCIER LE JMENU POUR Y AJOUTER LES OPTIONS AVANT DE L'ADD
         menu_bar.add(Menu);
 
         this.add(menu_bar, BorderLayout.NORTH);
