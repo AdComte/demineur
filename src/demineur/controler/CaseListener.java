@@ -53,14 +53,14 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
     @Override
     public void mouseClicked(MouseEvent e) {
         CaseVue c = (CaseVue) e.getSource();
-        
+
         if (e.getButton() == MouseEvent.BUTTON3) {
             c.getCase().estClique(true, false);
         }
         if (e.getButton() == MouseEvent.BUTTON1) {
             c.getCase().estClique(false, false);
         }
-        if(e.getButton() == MouseEvent.BUTTON2){
+        if (e.getButton() == MouseEvent.BUTTON2) {
             c.getCase().estClique(false, true);
         }
     }
@@ -111,13 +111,13 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
             }
         } else if (e.getSource().equals(this.fenetre.getMenuItem_charger())) {
             try {
-                if(jeu != null){
-                jeu.charger();
+                if (jeu != null) {
+                    jeu.charger();
                 } else {
-                    jeu = new Jeu(0,0,0);
+                    jeu = new Jeu(0, 0, 0);
                     jeu = jeu.charger();
-                    this.listenToGame();
                     this.fenetre.setFenetreJeu(jeu);
+                    this.listenToGame();
                 }
             } catch (IOException ex) {
                 Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);
