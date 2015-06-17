@@ -21,6 +21,15 @@ public class Case extends Observable {
     private Jeu jeu;
     private int bombes_adjacentes;
 
+    public Case(boolean flagged) {
+        this.flagged = flagged;
+    }
+
+    public Case(boolean flagged, boolean revealed, boolean mined) {
+        this.flagged = flagged;
+        this.revealed = revealed;
+        this.mined = mined;
+    }
 
     public Case() {
         this.bombes_adjacentes = 0;
