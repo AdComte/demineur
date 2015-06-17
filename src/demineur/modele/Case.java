@@ -46,11 +46,20 @@ public class Case extends Observable {
         //flag == false --> clic gauche -- révéler la case
         //voisin == true --> parcours des voisins pour les révéler
         //voisin == false --> parcours normal
-        
+
+        if (voisin) {
+            if (this.bombes_adjacentes == this.getNBVoisinsFlagged()) {
+                ArrayList<Case> voisins = this.getVoisins();
+                for (Case v : voisins) {
+                    v.estClique(false, false);
+                }
+            }
+        }
+
         if (!this.isRevealed()) {
             if (flag) {
                 this.setFlagged(!this.isFlagged());
-                //Mis à jour du compteur de bombes restantes dans la grille à -1 / +1 si on en rajoute un un jour
+                //Mise à jour du compteur de bombes restantes dans la grille à -1 / +1 si on en rajoute un un jour
             } else {
                 if (!this.isFlagged()) {
                     this.setRevealed(true);
@@ -64,17 +73,6 @@ public class Case extends Observable {
                             for (Case v : voisins) {
                                 v.estClique(false, false);
                             }
-                        }
-                    }
-                }
-            }
-        } else { //TODO : faire un parcours correct pour révélation rapide
-            if (voisin) {
-                if (this.bombes_adjacentes == this.getNBVoisinsFlagged()) {
-                    ArrayList<Case> voisins = this.getVoisins();
-                    for (Case v : voisins) {
-                        if (!v.isRevealed()) {
-                            this.estClique(false, false);
                         }
                     }
                 }
@@ -105,7 +103,10 @@ public class Case extends Observable {
 
     public void setFlagged(boolean flagged) {
         this.flagged = flagged;
-        this.jeu.setNb_drapeaux(this.jeu.getNb_drapeaux()+1);
+        if(flagged)
+            this.jeu.setNb_drapeaux(this.jeu.getNb_drapeaux() + 1);
+        else
+            this.jeu.setNb_drapeaux(this.jeu.getNb_drapeaux() - 1);
         setChanged();
         notifyObservers();
     }
