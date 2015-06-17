@@ -40,20 +40,8 @@ public class CaseVue extends JPanel implements Observer {
         this.Case.trouverBombes_Adjacentes();
         this.Case.addObserver(this);
         this.setSize(60, 60);
-        if (this.Case.isFlagged()) {
-            this.setImage("src/img/flag.png");
-        } else if (this.Case.isRevealed()) {
-            this.setImage("src/img/case_vide_revelee.png");
-            if (Case.getBombes_adjacentes() != 0) {
-                JLabel numero = new JLabel(Integer.toString(Case.getBombes_adjacentes()), JLabel.CENTER);
-                numero.setFocusable(false);
-                numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 30));
-                this.add(numero);
-            }
-        } else {
-            this.setImage("src/img/case_vide.png");
-        }
-
+        this.setImage("src/img/case_vide.png");
+        this.update(null, null);
         this.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
@@ -83,10 +71,6 @@ public class CaseVue extends JPanel implements Observer {
                 this.setImage("src/img/case_vide_revelee.png");
                 if (Case.getBombes_adjacentes() != 0) {
                     JLabel numero = new JLabel(Integer.toString(Case.getBombes_adjacentes()), JLabel.CENTER);
-                    /* SERT POUR LA TRANSPARANCE
-                     numero.setBackground(new Color(0, 0, 0, 255));
-                     numero.setOpaque(false);
-                     */
                     numero.setFocusable(false);
                     numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 30));
                     this.add(numero);

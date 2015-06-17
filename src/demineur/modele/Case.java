@@ -87,7 +87,23 @@ public class Case extends Observable {
         }
     }
 
+    public void refresh() {
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public int getNBVoisinsFlagged() {
+        int i = 0;
+        ArrayList<Case> voisins = this.getVoisins();
+        for (Case c : voisins) {
+            if (c.isFlagged()) {
+                i++;
+            }
+        }
+        return i;
+    }
 //Getters et setters
+
     public boolean isMined() {
         return mined;
     }
@@ -114,10 +130,11 @@ public class Case extends Observable {
 
     public void setFlagged(boolean flagged) {
         this.flagged = flagged;
-        if(flagged)
+        if (flagged) {
             this.jeu.setNb_drapeaux(this.jeu.getNb_drapeaux() + 1);
-        else
+        } else {
             this.jeu.setNb_drapeaux(this.jeu.getNb_drapeaux() - 1);
+        }
         setChanged();
         notifyObservers();
     }
@@ -134,17 +151,6 @@ public class Case extends Observable {
         ArrayList<Case> voisins;
         voisins = this.jeu.getVoisins(this);
         return voisins;
-    }
-
-    public int getNBVoisinsFlagged() {
-        int i = 0;
-        ArrayList<Case> voisins = this.getVoisins();
-        for (Case c : voisins) {
-            if (c.isFlagged()) {
-                i++;
-            }
-        }
-        return i;
     }
 
     public boolean isRevealed() {
@@ -164,11 +170,6 @@ public class Case extends Observable {
 
     public void setExploded(boolean exploded) {
         this.exploded = exploded;
-    }
-    
-    public void refresh(){
-        this.setChanged();
-        this.notifyObservers();
     }
 
 }

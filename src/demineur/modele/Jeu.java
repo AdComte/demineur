@@ -143,7 +143,6 @@ public class Jeu extends Observable {
                 this.cases[i][j].setRevealed(true);
             }
         }
-        //TODO : VEROUILLER LE JEU UNE FOIS TOUT REVELE, EN CE MOMENT APRES UNE DEFAITE ON PEUT CONTINUER A JOUER JUSQU'A LA VICTOIRE
         setChanged();
         notifyObservers();
     }
@@ -189,17 +188,18 @@ public class Jeu extends Observable {
     }
 
     public Jeu charger() throws FileNotFoundException, IOException {
+        //Déclaration des objets permettant la lecture ligne à ligne du fichier
         File fichier = new File("save.txt");
         FileReader FR = new FileReader(fichier);
         BufferedReader bf = new BufferedReader(FR);
         int i = 0, j = 0;
+        //Si le fichier de sauvegarde existe
         if (fichier.exists()) {
-            System.out.println("save exist");
-            String ligne = bf.readLine();
+            String ligne = bf.readLine();//La première ligne du fichier => la taille en x
             taille_x = Integer.parseInt(ligne);
-            ligne = bf.readLine();
+            ligne = bf.readLine();//La seconde représente la taille en y
             taille_y = Integer.parseInt(ligne);
-            ligne = bf.readLine();
+            ligne = bf.readLine();//La 3e représente le nombre de bombes
             this.nb_mines = Integer.parseInt(ligne);
             this.nb_drapeaux = 0;
             this.nb_cases_restantes = this.taille_x * this.taille_y;
@@ -209,24 +209,21 @@ public class Jeu extends Observable {
             this.positions = new Position[taille_x][taille_y];
             this.HM = new HashMap();
             this.HMR = new HashMap();
-            System.out.println("Entrée du while");
+            
             for (i = 0; i < taille_x; i++) {
                 for (j = 0; j < taille_y; j++) {
-                    this.cases[i][j] = new Case();
-                    if (cases[i][j] == null) {
-                        System.out.println("case nulle à la création");
-                    }
+                    this.cases[i][j] = new Case();//On crée des cases et on les ajoute aux HashMaps
                     positions[i][j] = new Position(i, j);
                     HM.put(cases[i][j], positions[i][j]);
                     HMR.put(positions[i][j], cases[i][j]);
                 }
             }
-            this.setJeu();
+            this.setJeu();//Pour chaque case, on définit leur attribut jeu comme l'objet courant (this)
             for (i = 0; i < taille_x; i++) {
-                for (j = 0; j < taille_y; j++) {
+                for (j = 0; j < taille_y; j++) {//On parcourt les cases
                     ligne = bf.readLine();
-                    switch (Integer.parseInt(ligne)) {
-                        case -1:
+                    switch (Integer.parseInt(ligne)) {//Selon la valeur lue, on en déduit le statut
+                        case -1:                      // de la case
                             cases[i][j].setMined(true);
                             break;
                         case 1:
@@ -243,7 +240,6 @@ public class Jeu extends Observable {
                 }
             }
         }
-        System.out.println("Sortie de la fonction de chargement de la partie");
         setChanged();
         notifyObservers();
         return this;

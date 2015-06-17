@@ -173,6 +173,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
             }
         }
     }
+    
 // Getters & Setters
 
     public JRadioButtonMenuItem getRbMenuItem1() {
