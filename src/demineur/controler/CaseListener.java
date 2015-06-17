@@ -100,6 +100,28 @@ public class CaseListener implements ActionListener, MouseListener, ItemListener
         } else if (e.getSource().equals(this.fenetre.getMenuItem_parametres()) && !this.fenetre.getCorps().isValid()) {
             //On affiche la page des paramètres
             this.fenetre.setFenetreMenu();
+        } else if (e.getSource().equals(this.fenetre.getMenuItem_enregistrer())) {
+            try {
+                jeu.enregistrer();
+                System.out.println("Enregistré !");
+            } catch (IOException ex) {
+                Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Enregistrement impossible");
+            }
+        } else if (e.getSource().equals(this.fenetre.getMenuItem_charger())) {
+            try {
+                if(jeu != null){
+                jeu.charger();
+                } else {
+                    jeu = new Jeu(0,0,0);
+                    jeu = jeu.charger();
+                    this.listenToGame();
+                    this.fenetre.setFenetreJeu(jeu);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(CaseListener.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Chargement impossible");
+            }
         }
 
     }

@@ -22,7 +22,7 @@ import java.util.Observer;
 public class FenetrePrincipale extends JFrame implements Observer {
 
     private JMenuBar menu_bar;
-    private JMenuItem MenuItem_parametres;
+    private JMenuItem MenuItem_parametres, MenuItem_enregistrer, MenuItem_charger;
     private JPanel corps;
     private JPanel grille;
     private Jeu jeu;
@@ -38,8 +38,13 @@ public class FenetrePrincipale extends JFrame implements Observer {
         //Instanciation des composants de jeu :
         this.menu_bar = new JMenuBar();
         MenuItem_parametres = new JMenuItem("Paramètres");
+        MenuItem_enregistrer = new JMenuItem("Sauvegarder");
+        MenuItem_charger = new JMenuItem("Charger");
         JMenu Menu = new JMenu("Menu");
         Menu.add(MenuItem_parametres);
+        Menu.add(MenuItem_enregistrer);
+        Menu.add(MenuItem_charger);
+
         this.grille = new JPanel(new GridLayout());
 
         rbMenuItem1 = new JRadioButtonMenuItem("Facile");
@@ -97,9 +102,13 @@ public class FenetrePrincipale extends JFrame implements Observer {
                 + "Il vous reste " + (this.jeu.getNb_mines() - this.jeu.getNb_drapeaux()) + " bombes à désamorcer");
         this.menu_bar.add(this.menu_label);
         //setContentPane(grille);
-        if(x<15 && y<15)    this.setPreferredSize(new Dimension(60*x, 60*y));
-        else if(x<25 && y<25)    this.setPreferredSize(new Dimension(40*x, 40*y));
-        else    this.setPreferredSize(new Dimension(30*x, 30*y));
+        if (x < 15 && y < 15) {
+            this.setPreferredSize(new Dimension(60 * x, 60 * y));
+        } else if (x < 25 && y < 25) {
+            this.setPreferredSize(new Dimension(40 * x, 40 * y));
+        } else {
+            this.setPreferredSize(new Dimension(30 * x, 30 * y));
+        }
         this.add(grille, BorderLayout.CENTER);
         this.pack();
         this.revalidate();
@@ -276,6 +285,22 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
     public void setGroup_radio(ButtonGroup group_radio) {
         this.group_radio = group_radio;
+    }
+
+    public JMenuItem getMenuItem_enregistrer() {
+        return MenuItem_enregistrer;
+    }
+
+    public void setMenuItem_enregistrer(JMenuItem MenuItem_enregistrer) {
+        this.MenuItem_enregistrer = MenuItem_enregistrer;
+    }
+
+    public JMenuItem getMenuItem_charger() {
+        return MenuItem_charger;
+    }
+
+    public void setMenuItem_charger(JMenuItem MenuItem_charger) {
+        this.MenuItem_charger = MenuItem_charger;
     }
 
 }

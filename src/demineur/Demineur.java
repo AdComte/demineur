@@ -33,6 +33,8 @@ public class Demineur {
         FP.pack();
         CaseListener cl = new CaseListener(FP);
         cl.getFenetre().getMenuItem_parametres().addActionListener(cl);
+        cl.getFenetre().getMenuItem_charger().addActionListener(cl);
+        cl.getFenetre().getMenuItem_enregistrer().addActionListener(cl);
         cl.getFenetre().getBouton_diff().addActionListener(cl);
         cl.getFenetre().getBouton_perso().addActionListener(cl);
 
