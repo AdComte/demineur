@@ -143,6 +143,7 @@ public class Jeu extends Observable {
                 this.cases[i][j].setRevealed(true);
             }
         }
+        //TODO : VEROUILLER LE JEU UNE FOIS TOUT REVELE, EN CE MOMENT APRES UNE DEFAITE ON PEUT CONTINUER A JOUER JUSQU'A LA VICTOIRE
         setChanged();
         notifyObservers();
     }
@@ -237,9 +238,11 @@ public class Jeu extends Observable {
                             cases[i][j].setFlagged(true);
                             cases[i][j].setMined(true);
                     }
+                    cases[i][j].refresh();
                 }
             }
         }
+        System.out.println("Sortie de la fonction de chargement de la partie");
         setChanged();
         notifyObservers();
         return this;
