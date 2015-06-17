@@ -94,6 +94,8 @@ public class Case extends Observable {
 
     public void setMined(boolean mined) {
         this.mined = mined;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public boolean isFlagged() {
@@ -106,6 +108,8 @@ public class Case extends Observable {
 
     public void setJeu(Jeu jeu) {
         this.jeu = jeu;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void setFlagged(boolean flagged) {
