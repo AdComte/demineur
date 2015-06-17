@@ -19,13 +19,11 @@ public class Case extends Observable {
     private boolean mined;
     private boolean exploded;
     private Jeu jeu;
-    private final int x, y;
     private int bombes_adjacentes;
 
-    public Case(int x, int y) {
-        this.x = x;
+
+    public Case() {
         this.bombes_adjacentes = 0;
-        this.y = y;
         this.flagged = false;
         this.revealed = false;
         this.mined = false;
@@ -117,14 +115,6 @@ public class Case extends Observable {
 
     public void setBombes_adjacentes(int bombes_adjacentes) {
         this.bombes_adjacentes = bombes_adjacentes;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public ArrayList<Case> getVoisins() {

@@ -59,7 +59,7 @@ public class FenetrePrincipale extends JFrame implements Observer {
 
         height_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
         width_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
-        mines_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
+        mines_spinner = new JSpinner(new SpinnerNumberModel(0, 0, 550, 1));
 
         bouton_perso = new JButton("Jouer");
 

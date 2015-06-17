@@ -66,19 +66,15 @@ public class Jeu extends Observable {
         this.HMR = new HashMap();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
-                cases[i][j] = new Case(i, j);
+                cases[i][j] = new Case();
                 positions[i][j] = new Position(i, j);
-                if (HM.put(cases[i][j], positions[i][j]) == null) {
-//                    System.out.println("insertion hashmap ok");
-                }
-                if (HMR.put(positions[i][j], cases[i][j]) == null) {
-//                    System.out.println("insertion HMR ok");
-                }
+                HM.put(cases[i][j], positions[i][j]);
+                HMR.put(positions[i][j], cases[i][j]);
             }
         }
         Random xpos = new Random(), ypos = new Random();
         if (nb_mines > taille_x * taille_y) {
-            nb_mines = taille_x * taille_y - 1;
+            this.nb_mines = (taille_x * taille_y)/3;
         }
         while (nb_mines > 0) {
             int X = xpos.nextInt(this.taille_x);
@@ -92,30 +88,30 @@ public class Jeu extends Observable {
 
     public ArrayList<Case> getVoisins(Case c) {
         ArrayList<Case> voisins = new ArrayList<>();
-        int x = c.getX(), y = c.getY();
-        if (x != 0) {
-            if (y != 0) {
-                voisins.add(HMR.get(positions[x - 1][y - 1]));
+        Position p = HM.get(c);
+        if (p.x != 0) {
+            if (p.y != 0) {
+                voisins.add(HMR.get(positions[p.x - 1][p.y - 1]));
             }
-            if (y != taille_y - 1) {
-                voisins.add(HMR.get(positions[x - 1][y + 1]));
+            if (p.y != taille_y - 1) {
+                voisins.add(HMR.get(positions[p.x - 1][p.y + 1]));
             }
-            voisins.add(HMR.get(positions[x - 1][y]));
+            voisins.add(HMR.get(positions[p.x - 1][p.y]));
         }
-        if (x != taille_x - 1) {
-            if (y != 0) {
-                voisins.add(HMR.get(positions[x + 1][y - 1]));
+        if (p.x != taille_x - 1) {
+            if (p.y != 0) {
+                voisins.add(HMR.get(positions[p.x + 1][p.y - 1]));
             }
-            if (y != taille_y - 1) {
-                voisins.add(HMR.get(positions[x + 1][y + 1]));
+            if (p.y != taille_y - 1) {
+                voisins.add(HMR.get(positions[p.x + 1][p.y + 1]));
             }
-            voisins.add(HMR.get(positions[x + 1][y]));
+            voisins.add(HMR.get(positions[p.x + 1][p.y]));
         }
-        if (y != taille_y - 1) {
-            voisins.add(HMR.get(positions[x][y + 1]));
+        if (p.y != taille_y - 1) {
+            voisins.add(HMR.get(positions[p.x][p.y + 1]));
         }
-        if (y != 0) {
-            voisins.add(HMR.get(positions[x][y - 1]));
+        if (p.y != 0) {
+            voisins.add(HMR.get(positions[p.x][p.y - 1]));
         }
 
         return voisins;

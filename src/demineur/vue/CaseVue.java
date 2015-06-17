@@ -58,8 +58,9 @@ public class CaseVue extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         this.removeAll();
         try {
-
-            if (this.Case.isFlagged()) {
+            if(this.Case.isFlagged() && this.Case.getJeu().isVictoire() && !this.Case.isMined()) {
+                this.setImage("src/img/flag_WRONG.png");
+            } else if (this.Case.isFlagged()) {
                 this.setImage("src/img/flag.png");
             } else if (!this.Case.isRevealed()) {
                 this.setImage("src/img/case_vide.png");
