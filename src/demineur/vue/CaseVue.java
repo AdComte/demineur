@@ -78,7 +78,6 @@ public class CaseVue extends JPanel implements Observer {
                 */
                 numero.setFocusable(false);
                 numero.setFont(new Font("Bernard MT Condensed", Font.BOLD, 30));
-                //TODO : faire la mise en forme du JLabel pour un affichage propre du numéro
                 this.add(numero);
                 }
             }
