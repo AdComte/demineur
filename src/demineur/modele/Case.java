@@ -165,5 +165,10 @@ public class Case extends Observable {
     public void setExploded(boolean exploded) {
         this.exploded = exploded;
     }
+    
+    public void refresh(){
+        this.setChanged();
+        this.notifyObservers();
+    }
 
 }
